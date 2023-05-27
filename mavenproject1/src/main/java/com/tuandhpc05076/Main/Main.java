@@ -29,8 +29,10 @@ import com.tuandhpc05076.swing0.SystemTheme;
 import com.tuandhpc05076.swing0.ThemeColor;
 import com.tuandhpc05076.swing0.ThemeColorChange;
 import com.tuandhpc05076.ThoiGian.Time;
+import com.tuandhpc05076.helper.ShareHelper;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Desktop;
 import java.net.URI;
 import java.time.Clock;
@@ -110,9 +112,9 @@ public class Main extends javax.swing.JFrame {
                     }
                 }
                 if (index == 7) {
-                    
-                      if (kiem == false) {
-                       mainBody.displayForm(new FormHome(), "Biểu đồ");
+
+                    if (kiem == false) {
+                        mainBody.displayForm(new FormHome(), "Biểu đồ");
                     } else {
                         JOptionPane.showMessageDialog(rootPane, "Bạn không có quyền xem biểu đồ doanh thu");
                     }
@@ -141,7 +143,7 @@ public class Main extends javax.swing.JFrame {
             @Override
             public void onColorChange(Color color) {
                 mainBody.changeColor(color);
-              
+
             }
         });
 
@@ -595,7 +597,7 @@ public class Main extends javax.swing.JFrame {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
-     
+
         this.dispose();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
@@ -613,11 +615,11 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-       int chon=JOptionPane.showConfirmDialog(this, "Bạn có muốn kết thúc không?","Kết thúc",JOptionPane.YES_NO_OPTION ); 
+        int chon = JOptionPane.showConfirmDialog(this, "Bạn có muốn kết thúc không?", "Kết thúc", JOptionPane.YES_NO_OPTION);
         System.out.println(chon);
-       if(chon==0){
-            System.exit(0); 
-       }
+        if (chon == 0) {
+            System.exit(0);
+        }
 // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
