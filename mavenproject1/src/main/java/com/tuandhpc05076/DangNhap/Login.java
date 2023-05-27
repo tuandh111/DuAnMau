@@ -12,7 +12,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
-
+//Người thiết kế Đặng Hoàng Tuấn
 public class Login extends PanelCustom {
 
     public static ArrayList<O_DangNhap> list1 = new ArrayList<>();
