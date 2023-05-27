@@ -15,7 +15,7 @@ import javax.swing.JPasswordField;
 
 /**
  *
- * @author DELL E5470
+ *tôi tên là Đặng Hoàng Tuấn
  */
 public class Login extends PanelCustom {
 
