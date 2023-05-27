@@ -21,6 +21,8 @@ import javax.swing.JPasswordField;
 
 //Đang học tại lớp IT18201
 
+//Đang học tại lớp IT18201 tôi muốn học lớp này
+
 public class Login extends PanelCustom {
 
     public static ArrayList<O_DangNhap> list1 = new ArrayList<>();
