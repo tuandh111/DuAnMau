@@ -14,11 +14,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 
 
-/**
- *
- *tôi tên là Đặng Hoàng Tuấn
- */
+
 //Người thiết kế Đặng Hoàng Tuấn
+
+
+
+//Đang học tại lớp IT18201
 
 public class Login extends PanelCustom {
 
