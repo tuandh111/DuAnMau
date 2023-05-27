@@ -613,7 +613,12 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        System.exit(0);        // TODO add your handling code here:
+       int chon=JOptionPane.showConfirmDialog(this, "Bạn có muốn kết thúc không?","Kết thúc",JOptionPane.YES_NO_OPTION ); 
+        System.out.println(chon);
+       if(chon==0){
+            System.exit(0); 
+       }
+// TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
