@@ -18,7 +18,7 @@ import javax.swing.JPasswordField;
  *
  *tôi tên là Đặng Hoàng Tuấn
  */
-
+//Người thiết kế Đặng Hoàng Tuấn
 
 public class Login extends PanelCustom {
 
