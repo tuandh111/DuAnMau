@@ -13,7 +13,14 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 
+<<<<<<< HEAD
 
+=======
+/**
+ *
+ * @author DELL E5470
+ */
+>>>>>>> parent of e97b03a (CapNhatLaiTen)
 public class Login extends PanelCustom {
 
     public static ArrayList<O_DangNhap> list1 = new ArrayList<>();
