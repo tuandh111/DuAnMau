@@ -18,6 +18,13 @@ import javax.swing.JPasswordField;
 
 //Đang học tại lớp IT18201 tôi muốn học lớp này
 
+<<<<<<< HEAD
+=======
+/**
+ *
+ *tôi tên là Đặng Hoàng Tuấn
+ */
+>>>>>>> parent of 6cb45c6 (Cập nhật lại lớp)
 public class Login extends PanelCustom {
 
     public static ArrayList<O_DangNhap> list1 = new ArrayList<>();
