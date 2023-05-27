@@ -43,13 +43,12 @@ public class NhanVien extends javax.swing.JPanel {
         TieuDe();
         loadDataToArray();
         Duyet();
-        
 
     }
 
     public void TieuDe() {
         tblmodel = new DefaultTableModel();
-        String[] tbl = new String[]{"Mã NV",  "Vai trò", "Họ và tên"};
+        String[] tbl = new String[]{"Mã NV", "Vai trò", "Họ và tên"};
         tblmodel.setColumnIdentifiers(tbl);
         tblUser.setModel(tblmodel);
     }
@@ -79,13 +78,13 @@ public class NhanVien extends javax.swing.JPanel {
     public void Duyet() {
         tblmodel.setRowCount(0);
         for (O_NhanVien nv : list) {
-            String ct ="";
-            if(nv.isVaiTro()){
-                ct="Trưởng phòng";
-            }else{
-                ct="Nhân viên";
+            String ct = "";
+            if (nv.isVaiTro()) {
+                ct = "Trưởng phòng";
+            } else {
+                ct = "Nhân viên";
             }
-            Object[] tbl = new Object[]{nv.getMaNV(),ct, nv.getHoTen()};
+            Object[] tbl = new Object[]{nv.getMaNV(), ct, nv.getHoTen()};
             tblmodel.addRow(tbl);
         }
     }
@@ -94,6 +93,7 @@ public class NhanVien extends javax.swing.JPanel {
         txtMaNV.setText("");
         txtMaNV.setEditable(true);
         txtMatKhau.setText("");
+        txtXacNhanMK.setText("");
         cboVaiTro.setSelectedItem(null);
         txtHoVaTen.setText("");
     }
@@ -109,33 +109,34 @@ public class NhanVien extends javax.swing.JPanel {
         }
         tblUser.setRowSelectionInterval(i, i);
     }
-String mk = ".{3,}";
-String hoTen ="^[a-zA-Z ]+$";
+    String mk = ".{3,}";
+    String hoTen = "^[a-zA-Z ]+$";
+
     public boolean checkForm() {
         if (txtMaNV.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Chưa chập Mã NV");
             return false;
         }
-        boolean kiemMa=false;
+        boolean kiemMa = false;
         for (O_NhanVien nv : list) {
-            if(nv.getMaNV().equals(txtMaNV.getText())){
-                kiemMa=true;
+            if (nv.getMaNV().equals(txtMaNV.getText())) {
+                kiemMa = true;
             }
         }
-        if(kiemMa){
-            JOptionPane.showMessageDialog(this,"Mã của bạn đã tồn tại trong danh sách không thê thêm vào");
+        if (kiemMa) {
+            JOptionPane.showMessageDialog(this, "Mã của bạn đã tồn tại trong danh sách không thê thêm vào");
             return false;
         }
         if (new String(txtMatKhau.getPassword()).equals("")) {
             JOptionPane.showMessageDialog(this, "Chưa nhập mật khẩu");
             return false;
         }
-        if(!new String(txtMatKhau.getPassword()).matches(mk)){
-            JOptionPane.showMessageDialog(this,"Mật khẩu ít nhất 3 kí tự");
+        if (!new String(txtMatKhau.getPassword()).matches(mk)) {
+            JOptionPane.showMessageDialog(this, "Mật khẩu ít nhất 3 kí tự");
             return false;
         }
-        if(!new String(txtMatKhau.getPassword()).equals(new String(txtXacNhanMK.getPassword()))){
-            JOptionPane.showMessageDialog(this,"Nhập lại mật khẩu không giống mật khẩu");
+        if (!new String(txtMatKhau.getPassword()).equals(new String(txtXacNhanMK.getPassword()))) {
+            JOptionPane.showMessageDialog(this, "Nhập lại mật khẩu không giống mật khẩu");
             return false;
         }
         if (cboVaiTro.getSelectedItem() == null) {
@@ -174,7 +175,7 @@ String hoTen ="^[a-zA-Z ]+$";
             PreparedStatement st = con.prepareStatement(sqla);
             st.setString(1, txtMaNV.getText());
             MaHoa mh = new MaHoa();
-            String pass=mh.toSHA(new String(txtMatKhau.getPassword()));
+            String pass = mh.toSHA(new String(txtMatKhau.getPassword()));
             st.setString(2, pass);
             st.setString(3, txtHoVaTen.getText());
             if (cboVaiTro.getSelectedItem().equals("Trưởng phòng")) {
@@ -208,13 +209,13 @@ String hoTen ="^[a-zA-Z ]+$";
         int chon = tblUser.getSelectedRow();
         String name = (String) tblmodel.getValueAt(chon, 0);
         boolean kiemXoaChinhMinh = false;
-        for (O_DangNhap dn  : listDangNhap) {
-           if(dn.getMaNV().equals(name)){
-               kiemXoaChinhMinh= true;
-           }
+        for (O_DangNhap dn : listDangNhap) {
+            if (dn.getMaNV().equals(name)) {
+                kiemXoaChinhMinh = true;
+            }
         }
-        if(kiemXoaChinhMinh){
-            JOptionPane.showMessageDialog(this,"Không được xóa chính mình");
+        if (kiemXoaChinhMinh) {
+            JOptionPane.showMessageDialog(this, "Không được xóa chính mình");
             return;
         }
         try {
@@ -299,7 +300,6 @@ String hoTen ="^[a-zA-Z ]+$";
         }
 
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -818,6 +818,5 @@ String hoTen ="^[a-zA-Z ]+$";
     private com.tuandhpc05076.Swing.TextField1 txtTimKiem;
     private com.tuandhpc05076.Swing.PasswordField txtXacNhanMK;
     // End of variables declaration//GEN-END:variables
-
 
 }
