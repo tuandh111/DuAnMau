@@ -13,10 +13,13 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 
+
 /**
  *
  *tôi tên là Đặng Hoàng Tuấn
  */
+
+
 public class Login extends PanelCustom {
 
     public static ArrayList<O_DangNhap> list1 = new ArrayList<>();
