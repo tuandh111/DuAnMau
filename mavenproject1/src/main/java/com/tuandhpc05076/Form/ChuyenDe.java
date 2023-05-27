@@ -736,6 +736,9 @@ public class ChuyenDe extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblUserMouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblUserMousePressed(evt);
+            }
         });
         jScrollPane1.setViewportView(tblUser);
 
@@ -864,31 +867,6 @@ public class ChuyenDe extends javax.swing.JPanel {
     private void tblUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUserMouseClicked
         // TODO add your handling code here:
 
-        int chon = tblUser.getSelectedRow();
-        String name = (String) tblModel.getValueAt(chon, 0);
-        for (O_ChuyenDe cd : listCD) {
-            if (cd.getMaCD().trim().equals(name)) {
-                txtMaChuyenDe.setText(cd.getMaCD());
-                txtMaChuyenDe.setEditable(false);
-                txtTenChuyenDe.setText(cd.getTenCD());
-                txtHocPhi.setText(String.valueOf(cd.getHocPhi()));
-                txtThoiLuongGio.setText(String.valueOf(cd.getThoiLuong()));
-                if (cd.getHinh().equals("No Avatar")) {
-                    txtAnh.setText("No Avatar");
-                    txtAnh.setIcon(null);
-                } else {
-                    txtAnh.setText("");
-                    ImageIcon imgic = new ImageIcon(getClass().getResource("/com/tuandhpc05076/Image/" + cd.getHinh()));
-                    Image img = imgic.getImage();
-                    int Width = txtAnh.getWidth();
-                    int Height = txtAnh.getHeight();
-                    txtAnh.setIcon(new ImageIcon(img.getScaledInstance(Width, Height, 0)));
-
-                }
-                txtMoTa.setText(cd.getMoTa());
-            }
-        }
-        jTabbedPane1.setSelectedIndex(0);
 
     }//GEN-LAST:event_tblUserMouseClicked
 
@@ -1051,6 +1029,37 @@ public class ChuyenDe extends javax.swing.JPanel {
             }
         }        // TODO add your handling code here:
     }//GEN-LAST:event_txtAnhMouseClicked
+
+    private void tblUserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUserMousePressed
+
+        int chon = tblUser.getSelectedRow();
+        String name = (String) tblModel.getValueAt(chon, 0);
+        if(evt.getClickCount()==2){
+        for (O_ChuyenDe cd : listCD) {
+            if (cd.getMaCD().trim().equals(name)) {
+                txtMaChuyenDe.setText(cd.getMaCD());
+                txtMaChuyenDe.setEditable(false);
+                txtTenChuyenDe.setText(cd.getTenCD());
+                txtHocPhi.setText(String.valueOf(cd.getHocPhi()));
+                txtThoiLuongGio.setText(String.valueOf(cd.getThoiLuong()));
+                if (cd.getHinh().equals("No Avatar")) {
+                    txtAnh.setText("No Avatar");
+                    txtAnh.setIcon(null);
+                } else {
+                    txtAnh.setText("");
+                    ImageIcon imgic = new ImageIcon(getClass().getResource("/com/tuandhpc05076/Image/" + cd.getHinh()));
+                    Image img = imgic.getImage();
+                    int Width = txtAnh.getWidth();
+                    int Height = txtAnh.getHeight();
+                    txtAnh.setIcon(new ImageIcon(img.getScaledInstance(Width, Height, 0)));
+
+                }
+                txtMoTa.setText(cd.getMoTa());
+            }
+        }
+        jTabbedPane1.setSelectedIndex(0);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_tblUserMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

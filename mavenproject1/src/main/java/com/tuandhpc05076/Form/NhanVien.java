@@ -248,13 +248,23 @@ public class NhanVien extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Bạn là nhân viên không có quyền cập nhật");
             return;
         }
+        if (new String(txtMatKhau.getPassword()).length() > 50) {
+            JOptionPane.showMessageDialog(this, "Mật khẩu cần nhập lại để có thể cập nhật");
+            return;
+        }
+        if (!new String(txtMatKhau.getPassword()).equals(new String(txtXacNhanMK.getPassword()))) {
+            JOptionPane.showMessageDialog(this, "Nhập lại mật khẩu không chính xác vui lòng nhập lại");
+            return;
+        }
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             java.sql.Connection con = DriverManager.getConnection(url, userName, password);
             String sqla = "UPDATE dbo.NhanVien SET MatKhau =? , HoTen=?, VaiTro =? WHERE MaNV =? ";
             PreparedStatement st = con.prepareStatement(sqla);
             st.setString(4, txtMaNV.getText());
-            st.setString(1, new String(txtMatKhau.getPassword()));
+            MaHoa mh = new MaHoa();
+            String MaHoaMatKhau = mh.toSHA(new String(txtMatKhau.getPassword()));
+            st.setString(1, MaHoaMatKhau);
             st.setString(2, txtHoVaTen.getText());
             if (cboVaiTro.getSelectedItem().equals("Trưởng phòng")) {
                 st.setBoolean(3, true);
@@ -566,6 +576,9 @@ public class NhanVien extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblUserMouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblUserMousePressed(evt);
+            }
         });
         jScrollPane1.setViewportView(tblUser);
 
@@ -683,23 +696,6 @@ public class NhanVien extends javax.swing.JPanel {
 
     private void tblUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUserMouseClicked
         // TODO add your handling code here:
-        int chon = tblUser.getSelectedRow();
-        String name = (String) tblmodel.getValueAt(chon, 0);
-        for (O_NhanVien nv : list) {
-            if (nv.getMaNV().trim().equals(name)) {
-                txtMaNV.setText(nv.getMaNV());
-                txtMaNV.setEditable(false);
-                txtMatKhau.setText(nv.getMatKhau());
-                txtXacNhanMK.setText(nv.getMatKhau());
-                if (nv.isVaiTro() == true) {
-                    cboVaiTro.setSelectedItem("Trưởng phòng");
-                } else {
-                    cboVaiTro.setSelectedItem("Nhân viên");
-                }
-                txtHoVaTen.setText(nv.getHoTen());
-            }
-        }
-        jTabbedPane1.setSelectedIndex(0);
 
     }//GEN-LAST:event_tblUserMouseClicked
 
@@ -794,6 +790,28 @@ public class NhanVien extends javax.swing.JPanel {
     private void btnCuoiMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCuoiMouseExited
         btnCuoi.setBackground(new Color(153, 153, 255));        // TODO add your handling code here:
     }//GEN-LAST:event_btnCuoiMouseExited
+
+    private void tblUserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUserMousePressed
+        int chon = tblUser.getSelectedRow();
+        String name = (String) tblmodel.getValueAt(chon, 0);
+        if (evt.getClickCount() == 2) {
+            for (O_NhanVien nv : list) {
+                if (nv.getMaNV().trim().equals(name)) {
+                    txtMaNV.setText(nv.getMaNV());
+                    txtMaNV.setEditable(false);
+                    txtMatKhau.setText(nv.getMatKhau());
+                    txtXacNhanMK.setText(nv.getMatKhau());
+                    if (nv.isVaiTro() == true) {
+                        cboVaiTro.setSelectedItem("Trưởng phòng");
+                    } else {
+                        cboVaiTro.setSelectedItem("Nhân viên");
+                    }
+                    txtHoVaTen.setText(nv.getHoTen());
+                }
+            }
+            jTabbedPane1.setSelectedIndex(0);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_tblUserMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
