@@ -16,8 +16,14 @@ import javax.swing.JPasswordField;
 
 /**
  *
+<<<<<<< HEAD
  * @author DELL E5470
 */
+=======
+ *tôi tên là Đặng Hoàng Tuấn
+ * học lớp IT18201
+ */
+>>>>>>> parent of f193f06 (Revert "Cập nhật lại lớp")
 public class Login extends PanelCustom {
 
     public static ArrayList<O_DangNhap> list1 = new ArrayList<>();
