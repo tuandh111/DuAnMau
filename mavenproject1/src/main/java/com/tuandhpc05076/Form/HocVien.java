@@ -9,6 +9,7 @@ import static com.tuandhpc05076.Form.NhanVien.list;
 import com.tuandhpc05076.Object.O_ChuyenDe;
 import com.tuandhpc05076.Object.O_DangNhap;
 import com.tuandhpc05076.Object.O_HocVien;
+import com.tuandhpc05076.Object.O_KhoaHoc;
 import com.tuandhpc05076.Object.O_NguoiHoc;
 import com.tuandhpc05076.swing0.Form;
 import java.awt.Color;
@@ -107,7 +108,7 @@ public class HocVien extends javax.swing.JPanel {
     public void DuyetHocVien() {
         tblmodel.setRowCount(0);
         for (O_HocVien hv : listHV) {
-         
+
             Object[] tbl = new Object[]{hv.getMaHV(), hv.getMaNH(), hv.getHoVaTen(), hv.getDiem()};
             tblmodel.addRow(tbl);
         }
@@ -116,13 +117,13 @@ public class HocVien extends javax.swing.JPanel {
     public void DuyetNguoiHoc() {
         tblmodel.setRowCount(0);
         for (O_NguoiHoc nh : NguoiHoc.listNH) {
-               String gt="";
-             if(nh.isGioiTinh()){
-                gt="Nam";
-            }else{
-                gt="Nữ";
+            String gt = "";
+            if (nh.isGioiTinh()) {
+                gt = "Nam";
+            } else {
+                gt = "Nữ";
             }
-            Object[] tbl = new Object[]{nh.getMaNH(), nh.getHoTen(),gt, nh.getNgaySinh(), nh.getDienThoai(), nh.getEmail(), nh.getGhiChu(), nh.getMaNV(), nh.getNgayDK()};
+            Object[] tbl = new Object[]{nh.getMaNH(), nh.getHoTen(), gt, nh.getNgaySinh(), nh.getDienThoai(), nh.getEmail(), nh.getGhiChu(), nh.getMaNV(), nh.getNgayDK()};
             tblmodel.addRow(tbl);
         }
     }
@@ -135,8 +136,15 @@ public class HocVien extends javax.swing.JPanel {
 
             String sql = "SELECT MaHV,KhoaHoc.MaKH,HocVien.MaNH,HoTen,Diem  FROM dbo.HocVien INNER JOIN dbo.KhoaHoc ON KhoaHoc.MaKH = HocVien.MaKH INNER JOIN dbo.NguoiHoc ON NguoiHoc.MaNH = HocVien.MaNH WHERE KhoaHoc.GhiChu= ?";
             PreparedStatement st = con.prepareStatement(sql);
+
             String name = (String) cboKhoaHoc.getSelectedItem();
-            st.setString(1, name);
+            if (name == null) {
+                return;
+            }
+            String[] ten = name.split("-");
+            System.out.println(ten[1]);
+            st.setString(1, ten[1]);
+
             ResultSet rs = st.executeQuery();
             listHV.clear();
             while (rs.next()) {
@@ -158,10 +166,11 @@ public class HocVien extends javax.swing.JPanel {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             java.sql.Connection con = DriverManager.getConnection(url, userName, password);
-            String sql = "SELECT KhoaHoc.MaKH,TenCD,ChuyenDe.HocPhi,ChuyenDe.ThoiLuong,Hinh,GhiChu FROM dbo.ChuyenDe INNER JOIN dbo.KhoaHoc ON KhoaHoc.MaCD = ChuyenDe.MaCD WHERE TenCD =?";
+            String sql = "SELECT ChuyenDe.MaCD,TenCD,KhoaHoc.MaKH,ChuyenDe.ThoiLuong,NgayKG,GhiChu FROM dbo.ChuyenDe INNER JOIN dbo.KhoaHoc ON KhoaHoc.MaCD = ChuyenDe.MaCD WHERE TenCD =?";
             PreparedStatement st = con.prepareStatement(sql);
             String name = (String) cboChuyenDe.getSelectedItem();
             st.setString(1, name);
+
             ResultSet rs = st.executeQuery();
             listCD.clear();
             while (rs.next()) {
@@ -175,6 +184,7 @@ public class HocVien extends javax.swing.JPanel {
                 String MoTa = rs.getString(6);
                 listCD.add(new O_ChuyenDe(MaCD, TenCD, HocPhi, ThoiLuong, Hinh, MoTa));
             }
+
             con.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -640,8 +650,7 @@ public class HocVien extends javax.swing.JPanel {
         LayDuLieuBangKhoaHoc();
         DefaultComboBoxModel tbl = new DefaultComboBoxModel();
         for (O_ChuyenDe cd : listCD) {
-
-            tbl.addElement(cd.getMoTa());
+            tbl.addElement(cd.getMaCD() + "-" + cd.getMoTa() + "-" + cd.getHinh());
         }
         cboKhoaHoc.setModel(tbl);
         cboKhoaHoc.setSelectedIndex(-1);
@@ -664,7 +673,6 @@ public class HocVien extends javax.swing.JPanel {
             return;
         }
         for (int i = 0; i < rows.length; i++) {
-            ;
 
             try {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -672,9 +680,13 @@ public class HocVien extends javax.swing.JPanel {
                 String sqla = "insert into dbo.HocVien values(?,?,?)";
                 PreparedStatement st = con.prepareStatement(sqla);
                 String name = (String) cboKhoaHoc.getSelectedItem();
+                String ten[] = name.split("-");
+
                 for (O_ChuyenDe cd : listCD) {
-                    if (cd.getMoTa().trim().equalsIgnoreCase(name)) {
-                        st.setString(1, cd.getMaCD());
+                    if (cd.getMoTa().trim().equalsIgnoreCase(ten[1])) {
+                        st.setInt(1, (int) cd.getHocPhi());
+                        System.out.println(cd.getHocPhi());
+
                     }
                 }
 
@@ -789,22 +801,22 @@ public class HocVien extends javax.swing.JPanel {
         try {
             Integer.parseInt(txtTimKiemHV.getText());
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this,"Không phải là số");
+            JOptionPane.showMessageDialog(this, "Không phải là số");
             return;
-            
+
         }
-        int i =0;
+        int i = 0;
         boolean kiem1 = false;
         for (O_HocVien hv : listHV) {
-            if(hv.getMaHV()==Integer.parseInt(txtTimKiemHV.getText())){
+            if (hv.getMaHV() == Integer.parseInt(txtTimKiemHV.getText())) {
                 tblHocVien.setRowSelectionInterval(i, i);
-                JOptionPane.showMessageDialog(this,"Đã tìm thấy");
-                kiem1= true;
+                JOptionPane.showMessageDialog(this, "Đã tìm thấy");
+                kiem1 = true;
             }
             i++;
         }
-        if(kiem1==false){
-            JOptionPane.showMessageDialog(this,"Không tìm thấy học viên trong mã này");
+        if (kiem1 == false) {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy học viên trong mã này");
         }
     }//GEN-LAST:event_btnTimKiemHVActionPerformed
 
