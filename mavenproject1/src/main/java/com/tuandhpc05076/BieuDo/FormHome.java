@@ -72,7 +72,7 @@ public class FormHome extends javax.swing.JPanel {
 //        chart.addLegend("Khoản chi", new Color(5, 125, 0), new Color(95, 209, 69));
 //        chart.addLegend("Cost", new Color(186, 37, 37), new Color(241, 100, 120));
         chart.addData(new ModelChart("2021", new double[]{0}));
-        chart.addData(new ModelChart("2022", new double[]{1500}));
+        chart.addData(new ModelChart("2022", new double[]{0}));
         chart.addData(new ModelChart("2023", new double[]{tong}));
 
         chart.start();

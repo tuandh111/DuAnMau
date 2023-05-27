@@ -183,10 +183,10 @@ public class NguoiHoc extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Họ tên của bạn đã để trống");
             return false;
         }
-        if (!txtHoVaTen.getText().matches(hoTen)) {
-            JOptionPane.showMessageDialog(this, "Họ tên không đúng định dạng");
-            return false;
-        }
+//        if (!txtHoVaTen.getText().matches(hoTen)) {
+//            JOptionPane.showMessageDialog(this, "Họ tên không đúng định dạng");
+//            return false;
+//        }
         if (buttonGroup1.getSelection() == null) {
             JOptionPane.showMessageDialog(this, "Giới tính của bạn chưa chọn");
             return false;

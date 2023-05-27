@@ -582,6 +582,9 @@ public class KhoaHoc extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblUserMouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblUserMousePressed(evt);
+            }
         });
         jScrollPane1.setViewportView(tblUser);
 
@@ -736,16 +739,7 @@ public class KhoaHoc extends javax.swing.JPanel {
 
     private void tblUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUserMouseClicked
         // TODO add your handling code here:
-        int chon = tblUser.getSelectedRow();
-        int name = (int) tblModel.getValueAt(chon, 0);
-        for (O_KhoaHoc kh : listKH) {
-            if (kh.getMaKH() == name) {
-                txtNgayKhaiGiang.setText(kh.getNgayKhaiGiang());
-                txtNgayTao.setText(kh.getNgayTao());
-                txtGhiChu.setText(kh.getGhiChu());
-            }
-        }
-        jTabbedPane1.setSelectedIndex(0);
+
     }//GEN-LAST:event_tblUserMouseClicked
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
@@ -840,6 +834,21 @@ public class KhoaHoc extends javax.swing.JPanel {
     private void btnInThanhExelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInThanhExelMouseEntered
         btnInThanhExel.setBackground(Color.pink);          // TODO add your handling code here:
     }//GEN-LAST:event_btnInThanhExelMouseEntered
+
+    private void tblUserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUserMousePressed
+        int chon = tblUser.getSelectedRow();
+        int name = (int) tblModel.getValueAt(chon, 0);
+        if (evt.getClickCount() == 2) {
+            for (O_KhoaHoc kh : listKH) {
+                if (kh.getMaKH() == name) {
+                    txtNgayKhaiGiang.setText(kh.getNgayKhaiGiang());
+                    txtNgayTao.setText(kh.getNgayTao());
+                    txtGhiChu.setText(kh.getGhiChu());
+                }
+            }
+            jTabbedPane1.setSelectedIndex(0);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_tblUserMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
