@@ -20,8 +20,8 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
-//        ChaoJDialog ct = new ChaoJDialog(this, true);
-//        ct.setVisible(true);
+        ChaoJDialog ct = new ChaoJDialog(this, true);
+        ct.setVisible(true);
         setLocationRelativeTo(null);
         setIconImage(ShareHelper.APP_ICON);
         setTitle("HỆ THỐNG ĐÀO TẠO EDUESY");
