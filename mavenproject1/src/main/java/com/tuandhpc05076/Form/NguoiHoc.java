@@ -71,7 +71,7 @@ public class NguoiHoc extends javax.swing.JPanel {
         String so = String.valueOf(Integer.parseInt(tbl[1]) + 1);
         String ten = "NH";
         for (int j = 0; j <= 4 - so.length(); j++) {
-            ten+="0";
+            ten += "0";
         }
         ten = ten + so;
         txtMaNguoiHoc.setText(ten);
@@ -135,7 +135,7 @@ public class NguoiHoc extends javax.swing.JPanel {
         txtDienThoai.setText("");
         txtEmail.setText("");
         txtGhiChu.setText("");
-        tuDongTangMa();  
+        tuDongTangMa();
     }
 
     public void showNguoiHoc() {
@@ -725,6 +725,9 @@ public class NguoiHoc extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblUserMouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblUserMousePressed(evt);
+            }
         });
         jScrollPane1.setViewportView(tblUser);
 
@@ -821,29 +824,6 @@ public class NguoiHoc extends javax.swing.JPanel {
 
     private void tblUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUserMouseClicked
         // TODO add your handling code here:
-        int chon = tblUser.getSelectedRow();
-
-        String name = (String) tblmodel.getValueAt(chon, 0);
-        System.out.println(name);
-        for (O_NguoiHoc nh : listNH) {
-            if (nh.getMaNH().trim().equals(name.trim())) {
-
-                txtMaNguoiHoc.setText(nh.getMaNH());
-                txtHoVaTen.setText(nh.getHoTen());
-                if (nh.isGioiTinh()) {
-                    rdoNam.setSelected(true);
-                } else {
-                    rdoNu.setSelected(true);
-                }
-                txtNgaySinh.setText(nh.getNgaySinh());
-                txtDienThoai.setText(nh.getDienThoai());
-                txtEmail.setText(nh.getEmail());
-                txtGhiChu.setText(nh.getGhiChu());
-
-            }
-
-        }
-        jTabbedPane1.setSelectedIndex(0);
 
     }//GEN-LAST:event_tblUserMouseClicked
 
@@ -981,6 +961,33 @@ public class NguoiHoc extends javax.swing.JPanel {
     private void btnInThanhExelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInThanhExelActionPerformed
         btnInDanhSach();        // TODO add your handling code here:
     }//GEN-LAST:event_btnInThanhExelActionPerformed
+
+    private void tblUserMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUserMousePressed
+        int chon = tblUser.getSelectedRow();
+
+        String name = (String) tblmodel.getValueAt(chon, 0);
+        if (evt.getClickCount() == 2) {
+            for (O_NguoiHoc nh : listNH) {
+                if (nh.getMaNH().trim().equals(name.trim())) {
+
+                    txtMaNguoiHoc.setText(nh.getMaNH());
+                    txtHoVaTen.setText(nh.getHoTen());
+                    if (nh.isGioiTinh()) {
+                        rdoNam.setSelected(true);
+                    } else {
+                        rdoNu.setSelected(true);
+                    }
+                    txtNgaySinh.setText(nh.getNgaySinh());
+                    txtDienThoai.setText(nh.getDienThoai());
+                    txtEmail.setText(nh.getEmail());
+                    txtGhiChu.setText(nh.getGhiChu());
+
+                }
+
+            }
+            jTabbedPane1.setSelectedIndex(0);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_tblUserMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
