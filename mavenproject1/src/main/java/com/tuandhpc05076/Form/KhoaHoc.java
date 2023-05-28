@@ -143,7 +143,7 @@ public class KhoaHoc extends javax.swing.JPanel {
             return false;
         }
         if (txtGhiChu.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Ghi chú của bạn đã để trống");
+            JOptionPane.showMessageDialog(this, "Lớp học của bạn đã để trống");
             return false;
         }
         return true;
@@ -472,7 +472,7 @@ public class KhoaHoc extends javax.swing.JPanel {
             }
         });
 
-        textAreaScroll2.setLabelText("Ghi chú");
+        textAreaScroll2.setLabelText("Lớp học");
 
         txtGhiChu.setColumns(20);
         txtGhiChu.setRows(5);

@@ -344,7 +344,7 @@
             </Component>
             <Container class="textarea.TextAreaScroll" name="textAreaScroll2">
               <Properties>
-                <Property name="labelText" type="java.lang.String" value="Ghi ch&#xfa;"/>
+                <Property name="labelText" type="java.lang.String" value="L&#x1edb;p h&#x1ecd;c"/>
               </Properties>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
