@@ -9,16 +9,26 @@ import com.tuandhpc05076.Object.O_DangNhap;
 import com.tuandhpc05076.Object.O_NhanVien;
 import com.tuandhpc05076.swing0.Form;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -78,13 +88,13 @@ public class NhanVien extends javax.swing.JPanel {
     public void Duyet() {
         tblmodel.setRowCount(0);
         for (O_NhanVien nv : list) {
-            String ct = "";
-            if (nv.isVaiTro()) {
-                ct = "Trưởng phòng";
-            } else {
-                ct = "Nhân viên";
-            }
-            Object[] tbl = new Object[]{nv.getMaNV(), ct, nv.getHoTen()};
+//            String ct = "";
+//            if (nv.isVaiTro()) {
+//                ct = "Trưởng phòng";
+//            } else {
+//                ct = "Nhân viên";
+//            }
+            Object[] tbl = new Object[]{nv.getMaNV(), nv.isVaiTro() ? "Trưởng phòng" : "Nhân viên", nv.getHoTen()};
             tblmodel.addRow(tbl);
         }
     }
@@ -94,6 +104,8 @@ public class NhanVien extends javax.swing.JPanel {
         txtMaNV.setEditable(true);
         txtMatKhau.setText("");
         txtXacNhanMK.setText("");
+        txtMatKhau.setEditable(true);
+        txtXacNhanMK.setEditable(true);
         cboVaiTro.setSelectedItem(null);
         txtHoVaTen.setText("");
     }
@@ -259,17 +271,17 @@ public class NhanVien extends javax.swing.JPanel {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             java.sql.Connection con = DriverManager.getConnection(url, userName, password);
-            String sqla = "UPDATE dbo.NhanVien SET MatKhau =? , HoTen=?, VaiTro =? WHERE MaNV =? ";
+            String sqla = "UPDATE dbo.NhanVien SET  HoTen=?, VaiTro =? WHERE MaNV =? ";
             PreparedStatement st = con.prepareStatement(sqla);
-            st.setString(4, txtMaNV.getText());
-            MaHoa mh = new MaHoa();
-            String MaHoaMatKhau = mh.toSHA(new String(txtMatKhau.getPassword()));
-            st.setString(1, MaHoaMatKhau);
-            st.setString(2, txtHoVaTen.getText());
+            st.setString(3, txtMaNV.getText());
+//            MaHoa mh = new MaHoa();
+//            String MaHoaMatKhau = mh.toSHA(new String(txtMatKhau.getPassword()));
+//            st.setString(1, MaHoaMatKhau);
+            st.setString(1, txtHoVaTen.getText());
             if (cboVaiTro.getSelectedItem().equals("Trưởng phòng")) {
-                st.setBoolean(3, true);
+                st.setBoolean(2, true);
             } else {
-                st.setBoolean(3, false);
+                st.setBoolean(2, false);
             }
             st.executeUpdate();
             con.close();
@@ -335,10 +347,16 @@ public class NhanVien extends javax.swing.JPanel {
         tblUser = new javax.swing.JTable();
         txtTimKiem = new com.tuandhpc05076.Swing.TextField1();
         btnTimKiem = new com.tuandhpc05076.Swing.Button();
+        btnInThanhExel1 = new com.tuandhpc05076.Swing.Button();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -494,11 +512,9 @@ public class NhanVien extends javax.swing.JPanel {
 
         txtMatKhau.setBackground(new java.awt.Color(255, 255, 255));
         txtMatKhau.setLabelText("Mật khẩu");
-        txtMatKhau.setShowAndHide(true);
 
         txtXacNhanMK.setBackground(new java.awt.Color(255, 255, 255));
         txtXacNhanMK.setLabelText("Xác nhận mật khẩu");
-        txtXacNhanMK.setShowAndHide(true);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -602,6 +618,24 @@ public class NhanVien extends javax.swing.JPanel {
             }
         });
 
+        btnInThanhExel1.setBackground(new java.awt.Color(153, 153, 255));
+        btnInThanhExel1.setForeground(new java.awt.Color(255, 255, 255));
+        btnInThanhExel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/tuandhpc05076/icon1/add-folder.png"))); // NOI18N
+        btnInThanhExel1.setText("In thành file Excel");
+        btnInThanhExel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnInThanhExel1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnInThanhExel1MouseExited(evt);
+            }
+        });
+        btnInThanhExel1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInThanhExel1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -609,9 +643,14 @@ public class NhanVien extends javax.swing.JPanel {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 924, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(txtTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnInThanhExel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -622,8 +661,10 @@ public class NhanVien extends javax.swing.JPanel {
                     .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(btnInThanhExel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Danh sách", jPanel2);
@@ -799,8 +840,10 @@ public class NhanVien extends javax.swing.JPanel {
                 if (nv.getMaNV().trim().equals(name)) {
                     txtMaNV.setText(nv.getMaNV());
                     txtMaNV.setEditable(false);
-                    txtMatKhau.setText(nv.getMatKhau());
-                    txtXacNhanMK.setText(nv.getMatKhau());
+                   txtMatKhau.setText("******");
+                    txtXacNhanMK.setText("******");
+                    txtMatKhau.setEditable(false);
+                    txtXacNhanMK.setEditable(false);
                     if (nv.isVaiTro() == true) {
                         cboVaiTro.setSelectedItem("Trưởng phòng");
                     } else {
@@ -813,10 +856,75 @@ public class NhanVien extends javax.swing.JPanel {
         }        // TODO add your handling code here:
     }//GEN-LAST:event_tblUserMousePressed
 
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+       // TODO add your handling code here:
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
+
+    private void btnInThanhExel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInThanhExel1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnInThanhExel1MouseEntered
+
+    private void btnInThanhExel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInThanhExel1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnInThanhExel1MouseExited
+
+    private void btnInThanhExel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInThanhExel1ActionPerformed
+        // TODO add your handling code here:
+        btnInDanhSach();
+    }//GEN-LAST:event_btnInThanhExel1ActionPerformed
+    public void btnInDanhSach() {
+        try {
+            JFileChooser jFileChooser = new JFileChooser();
+            jFileChooser.showSaveDialog(this);
+            File saveFile = jFileChooser.getSelectedFile();
+
+            if (saveFile != null) {
+                saveFile = new File(saveFile.toString() + ".xlsx");
+                Workbook wb = new XSSFWorkbook();
+                Sheet sheet = wb.createSheet("Danh sách nhân viên");
+
+                Row rowCol = sheet.createRow(0);
+                for (int i = 0; i < tblUser.getColumnCount(); i++) {
+                    org.apache.poi.ss.usermodel.Cell cell = rowCol.createCell(i);
+                    cell.setCellValue(tblUser.getColumnName(i));
+                }
+
+                for (int j = 0; j < tblUser.getRowCount(); j++) {
+                    Row row = sheet.createRow(j + 1);
+                    for (int k = 0; k < tblUser.getColumnCount(); k++) {
+                        org.apache.poi.ss.usermodel.Cell cell = row.createCell(k);
+                        if (tblUser.getValueAt(j, k) != null) {
+                            cell.setCellValue(tblUser.getValueAt(j, k).toString());
+                        }
+                    }
+                }
+                FileOutputStream out = new FileOutputStream(new File(saveFile.toString()));
+                wb.write(out);
+                wb.close();
+                out.close();
+                OpenFile(saveFile.toString());
+            } else {
+                JOptionPane.showMessageDialog(null, "Lỗi");
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
+        } catch (IOException io) {
+            System.out.println(io);
+        }
+    }
+
+    public void OpenFile(String file) {
+        try {
+            File path = new File(file);
+            Desktop.getDesktop().open(path);
+        } catch (Exception e) {
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.tuandhpc05076.Swing.Button btnCuoi;
     private com.tuandhpc05076.Swing.Button btnDau;
+    private com.tuandhpc05076.Swing.Button btnInThanhExel1;
     private com.tuandhpc05076.Swing.Button btnLui;
     private com.tuandhpc05076.Swing.Button btnMoi;
     private com.tuandhpc05076.Swing.Button btnSua;

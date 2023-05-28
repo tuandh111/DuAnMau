@@ -710,6 +710,7 @@ public class HocVien extends javax.swing.JPanel {
             }
         }
         JOptionPane.showMessageDialog(this, "Thêm người học thành công");
+        jTabbedPane1.setSelectedIndex(1);
 
     }//GEN-LAST:event_button10ActionPerformed
 
