@@ -58,7 +58,7 @@ public class NguoiHoc extends javax.swing.JPanel {
         loadDataToArray();
         Duyet();
         txtMaNguoiHoc.setEditable(false);
-
+        
     }
 
     public void tuDongTangMa() {
@@ -310,6 +310,11 @@ public class NguoiHoc extends javax.swing.JPanel {
     }
 
     public void btnUpdate() {
+        int chon = tblUser.getSelectedRow();
+        if (chon < 0) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn người học để có thể cập nhật");
+            return;
+        }
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             java.sql.Connection con = DriverManager.getConnection(url, userName, password);
@@ -345,6 +350,11 @@ public class NguoiHoc extends javax.swing.JPanel {
     }
 
     public void btnDelete() {
+        int chon = tblUser.getSelectedRow();
+        if (chon < 0) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn người học để có thể xóa");
+            return;
+        }
         boolean kiem = false;
         for (O_DangNhap dn : listDangNhap) {
             if (dn.isVaiTro() == false) {
