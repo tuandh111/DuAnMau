@@ -172,3 +172,5 @@ EXECUTE dbo.sp_ThongKeDoanhThu @Year = 2023 -- int
 --demo
 go
 select * from NhanVien where HoTen like N'Nguyễn Thanh Bình'
+SELECT MaHV,KhoaHoc.MaKH,HocVien.MaNH,HoTen,Diem  FROM dbo.HocVien INNER JOIN dbo.KhoaHoc ON KhoaHoc.MaKH = HocVien.MaKH INNER JOIN dbo.NguoiHoc ON NguoiHoc.MaNH = HocVien.MaNH WHERE NgayKG= '2023-09-01'
+SELECT ChuyenDe.MaCD,TenCD,ChuyenDe.HocPhi,ChuyenDe.ThoiLuong,NgayKG,GhiChu FROM dbo.ChuyenDe INNER JOIN dbo.KhoaHoc ON KhoaHoc.MaCD = ChuyenDe.MaCD WHERE TenCD =N'Java 1'

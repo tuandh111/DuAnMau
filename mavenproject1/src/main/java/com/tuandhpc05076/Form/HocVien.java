@@ -93,7 +93,7 @@ public class HocVien extends javax.swing.JPanel {
 
     public void TieuDeNguoiHoc() {
         tblmodel = new DefaultTableModel();
-        String[] tbl = new String[]{"Mã NH", "Họ và tên", "Giới tính", "Ngày sinh", "Điện thoại", "Email", "Ghi chú", "Mã NV", "Ngày đăng ký"};
+        String[] tbl = new String[]{"Mã NH", "Họ và tên", "Giới tính", "Ngày sinh", "Điện thoại", "Email", "Ghi chú", "Mã người thêm vào", "Ngày đăng ký"};
         tblmodel.setColumnIdentifiers(tbl);
         tblNguoiHoc.setModel(tblmodel);
     }
@@ -681,16 +681,23 @@ public class HocVien extends javax.swing.JPanel {
                 PreparedStatement st = con.prepareStatement(sqla);
                 String name = (String) cboKhoaHoc.getSelectedItem();
                 String ten[] = name.split("-");
-
+                float ten1 = 0;
                 for (O_ChuyenDe cd : listCD) {
                     if (cd.getMoTa().trim().equalsIgnoreCase(ten[1])) {
                         st.setInt(1, (int) cd.getHocPhi());
-                        System.out.println(cd.getHocPhi());
+                        ten1 = cd.getHocPhi();
 
                     }
                 }
-
                 st.setString(2, tblNguoiHoc.getValueAt(rows[i], 0).toString());
+                for (O_HocVien hv : listHV) {
+                    if(hv.getMaKH()==ten1&&hv.getMaNH().trim().equals(tblNguoiHoc.getValueAt(rows[i], 0).toString())){
+                        JOptionPane.showMessageDialog(this,"Người học này đã học trong khóa học này rồi");
+                        return;
+                    }
+                }
+                
+                
                 st.setFloat(3, 0);
 
                 st.executeUpdate();
