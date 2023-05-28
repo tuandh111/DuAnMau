@@ -121,6 +121,9 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="hint" type="java.lang.String" value="Nh&#x1ead;p m&#xe3;"/>
+        <Property name="selectedTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="com.tuandhpc05076.DangNhap.Password" name="txtMatKhauMoi2">

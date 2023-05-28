@@ -165,6 +165,7 @@ public class Register extends PanelCustom {
 
         txtTenDangNhap.setForeground(new java.awt.Color(255, 255, 255));
         txtTenDangNhap.setHint("Nhập mã");
+        txtTenDangNhap.setSelectedTextColor(new java.awt.Color(255, 255, 255));
 
         txtMatKhauMoi2.setForeground(new java.awt.Color(255, 255, 255));
         txtMatKhauMoi2.setHint("Nhập lại mật khẩu");
