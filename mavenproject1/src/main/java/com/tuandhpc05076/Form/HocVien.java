@@ -691,13 +691,12 @@ public class HocVien extends javax.swing.JPanel {
                 }
                 st.setString(2, tblNguoiHoc.getValueAt(rows[i], 0).toString());
                 for (O_HocVien hv : listHV) {
-                    if(hv.getMaKH()==ten1&&hv.getMaNH().trim().equals(tblNguoiHoc.getValueAt(rows[i], 0).toString())){
-                        JOptionPane.showMessageDialog(this,"Người học này đã học trong khóa học này rồi");
+                    if (hv.getMaKH() == ten1 && hv.getMaNH().trim().equals(tblNguoiHoc.getValueAt(rows[i], 0).toString())) {
+                        JOptionPane.showMessageDialog(this, "Người học này đã học trong khóa học này rồi");
                         return;
                     }
                 }
-                
-                
+
                 st.setFloat(3, 0);
 
                 st.executeUpdate();
