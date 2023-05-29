@@ -142,7 +142,7 @@ public class HocVien extends javax.swing.JPanel {
                 return;
             }
             String[] ten = name.split("-");
-            System.out.println(ten[1]);
+           
             st.setString(1, ten[1]);
 
             ResultSet rs = st.executeQuery();
