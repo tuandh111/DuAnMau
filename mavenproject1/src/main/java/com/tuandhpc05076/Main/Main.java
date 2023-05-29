@@ -77,6 +77,7 @@ public class Main extends javax.swing.JFrame {
         }
         init();
     }
+    
     int i = 0;
 
     private void init() {

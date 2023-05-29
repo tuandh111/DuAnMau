@@ -305,8 +305,8 @@ public class NhanVien extends javax.swing.JPanel {
             if (nv.getMaNV().trim().equals(txtTimKiem.getText())) {
                 txtMaNV.setText(nv.getMaNV());
                 txtMaNV.setEditable(false);
-                txtMatKhau.setText(nv.getMatKhau());
-                txtXacNhanMK.setText(nv.getMatKhau());
+                txtMatKhau.setText("******");
+                txtXacNhanMK.setText("******");
                 if (nv.isVaiTro() == true) {
                     cboVaiTro.setSelectedItem("Trưởng phòng");
                 } else {
@@ -862,11 +862,12 @@ public class NhanVien extends javax.swing.JPanel {
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
     private void btnInThanhExel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInThanhExel1MouseEntered
-        // TODO add your handling code here:
+ btnInThanhExel1.setBackground(Color.pink);         // TODO add your handling code here:
     }//GEN-LAST:event_btnInThanhExel1MouseEntered
 
     private void btnInThanhExel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInThanhExel1MouseExited
         // TODO add your handling code here:
+          btnInThanhExel1.setBackground(new Color(153, 153, 255)); 
     }//GEN-LAST:event_btnInThanhExel1MouseExited
 
     private void btnInThanhExel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInThanhExel1ActionPerformed

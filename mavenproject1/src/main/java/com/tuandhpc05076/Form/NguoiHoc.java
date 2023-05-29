@@ -58,7 +58,7 @@ public class NguoiHoc extends javax.swing.JPanel {
         loadDataToArray();
         Duyet();
         txtMaNguoiHoc.setEditable(false);
-        
+
     }
 
     public void tuDongTangMa() {
@@ -297,7 +297,7 @@ public class NguoiHoc extends javax.swing.JPanel {
                 txtDienThoai.setText(nh.getDienThoai());
                 txtEmail.setText(nh.getEmail());
                 txtGhiChu.setText(nh.getGhiChu());
-                tblUser.setRowSelectionInterval(i, i);
+//                tblUser.setRowSelectionInterval(i, i);
                 JOptionPane.showMessageDialog(this, "Đã tìm thấy");
                 kiem = true;
                 jTabbedPane1.setSelectedIndex(0);
@@ -464,6 +464,7 @@ public class NguoiHoc extends javax.swing.JPanel {
         txtTimKiem = new com.tuandhpc05076.Swing.TextField1();
         btnTimKiem = new com.tuandhpc05076.Swing.Button();
         btnInThanhExel = new com.tuandhpc05076.Swing.Button();
+        cboVaiTro = new com.tuandhpc05076.Swing.Combobox();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -699,7 +700,7 @@ public class NguoiHoc extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDienThoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addComponent(textAreaScroll1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -779,6 +780,15 @@ public class NguoiHoc extends javax.swing.JPanel {
             }
         });
 
+        cboVaiTro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tất cả", "Nam", "Nữ" }));
+        cboVaiTro.setSelectedIndex(-1);
+        cboVaiTro.setLabeText("Chọn điều kiện lọc");
+        cboVaiTro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboVaiTroActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -787,8 +797,10 @@ public class NguoiHoc extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(txtTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(cboVaiTro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -799,15 +811,21 @@ public class NguoiHoc extends javax.swing.JPanel {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(15, 15, 15))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(cboVaiTro, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnInThanhExel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Danh sách", jPanel2);
@@ -999,6 +1017,43 @@ public class NguoiHoc extends javax.swing.JPanel {
         }        // TODO add your handling code here:
     }//GEN-LAST:event_tblUserMousePressed
 
+    private void cboVaiTroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboVaiTroActionPerformed
+        // TODO add your handling code here:
+        loadDataToArray();
+
+        tblmodel.setRowCount(0);
+        String name = (String) cboVaiTro.getSelectedItem();
+        if (name.equals("Nam")) {
+            for (O_NguoiHoc nh : listNH) {
+                if (nh.isGioiTinh()) {
+                    String gt = "";
+                    if (nh.isGioiTinh()) {
+                        gt = "Nam";
+                    } else {
+                        gt = "Nữ";
+                    }
+                    Object[] tbl = new Object[]{nh.getMaNH(), nh.getHoTen(), gt, nh.getNgaySinh(), nh.getDienThoai(), nh.getEmail(), nh.getGhiChu(), nh.getMaNV(), nh.getNgayDK()};
+                    tblmodel.addRow(tbl);
+                }
+            }
+        }else if(name.equals("Nữ")){
+               for (O_NguoiHoc nh : listNH) {
+                if (nh.isGioiTinh()==false) {
+                    String gt = "";
+                    if (nh.isGioiTinh()) {
+                        gt = "Nam";
+                    } else {
+                        gt = "Nữ";
+                    }
+                    Object[] tbl = new Object[]{nh.getMaNH(), nh.getHoTen(), gt, nh.getNgaySinh(), nh.getDienThoai(), nh.getEmail(), nh.getGhiChu(), nh.getMaNV(), nh.getNgayDK()};
+                    tblmodel.addRow(tbl);
+                }
+            }
+        }else{
+            Duyet();
+        }
+    }//GEN-LAST:event_cboVaiTroActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.tuandhpc05076.Swing.Button btnCuoi;
@@ -1012,6 +1067,7 @@ public class NguoiHoc extends javax.swing.JPanel {
     private com.tuandhpc05076.Swing.Button btnXoa;
     private com.tuandhpc05076.Swing.Button btntThem;
     private javax.swing.ButtonGroup buttonGroup1;
+    private com.tuandhpc05076.Swing.Combobox cboVaiTro;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
