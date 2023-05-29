@@ -113,7 +113,7 @@ public class NhanVien extends javax.swing.JPanel {
     public void ShowThongTin() {
         O_NhanVien nv = list.get(i);
         txtMaNV.setText(nv.getMaNV());
-        txtMatKhau.setText(nv.getMatKhau());
+        txtMatKhau.setText("******");
         if (nv.isVaiTro() == true) {
             cboVaiTro.setSelectedItem("Trưởng phòng");
         } else {
