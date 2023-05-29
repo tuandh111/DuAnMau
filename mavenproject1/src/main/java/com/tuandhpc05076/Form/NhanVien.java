@@ -114,6 +114,7 @@ public class NhanVien extends javax.swing.JPanel {
         O_NhanVien nv = list.get(i);
         txtMaNV.setText(nv.getMaNV());
         txtMatKhau.setText("******");
+        txtXacNhanMK.setText("******");
         if (nv.isVaiTro() == true) {
             cboVaiTro.setSelectedItem("Trưởng phòng");
         } else {
