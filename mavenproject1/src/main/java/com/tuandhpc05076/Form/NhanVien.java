@@ -120,7 +120,7 @@ public class NhanVien extends javax.swing.JPanel {
         } else {
             cboVaiTro.setSelectedItem("Nhân viên");
         }
-        tblUser.setRowSelectionInterval(i, i);
+//        tblUser.setRowSelectionInterval(i, i);
     }
     String mk = ".{3,}";
     String hoTen = "^[a-zA-Z ]+$";
@@ -236,6 +236,10 @@ public class NhanVien extends javax.swing.JPanel {
             java.sql.Connection con = DriverManager.getConnection(url, userName, password);
             String sqla = "DELETE FROM dbo.NhanVien WHERE MaNV=? ";
             PreparedStatement st = con.prepareStatement(sqla);
+            if (cboVaiTro.getSelectedItem().equals("Trưởng phòng")) {
+                JOptionPane.showMessageDialog(this, "Không thể xóa trưởng phòng");
+                return;
+            }
             st.setString(1, txtMaNV.getText());
 
             st.executeUpdate();
@@ -349,6 +353,7 @@ public class NhanVien extends javax.swing.JPanel {
         txtTimKiem = new com.tuandhpc05076.Swing.TextField1();
         btnTimKiem = new com.tuandhpc05076.Swing.Button();
         btnInThanhExel1 = new com.tuandhpc05076.Swing.Button();
+        cboDieuKienLoc = new com.tuandhpc05076.Swing.Combobox();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -637,6 +642,15 @@ public class NhanVien extends javax.swing.JPanel {
             }
         });
 
+        cboDieuKienLoc.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tất cả", "Trưởng phòng", "Nhân viên" }));
+        cboDieuKienLoc.setSelectedIndex(-1);
+        cboDieuKienLoc.setLabeText("Chọn điều kiện lọc");
+        cboDieuKienLoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboDieuKienLocActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -645,8 +659,10 @@ public class NhanVien extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(txtTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(cboDieuKienLoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -657,10 +673,12 @@ public class NhanVien extends javax.swing.JPanel {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(9, 9, 9)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboDieuKienLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
@@ -841,7 +859,7 @@ public class NhanVien extends javax.swing.JPanel {
                 if (nv.getMaNV().trim().equals(name)) {
                     txtMaNV.setText(nv.getMaNV());
                     txtMaNV.setEditable(false);
-                   txtMatKhau.setText("******");
+                    txtMatKhau.setText("******");
                     txtXacNhanMK.setText("******");
                     txtMatKhau.setEditable(false);
                     txtXacNhanMK.setEditable(false);
@@ -858,22 +876,58 @@ public class NhanVien extends javax.swing.JPanel {
     }//GEN-LAST:event_tblUserMousePressed
 
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
-       // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
     private void btnInThanhExel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInThanhExel1MouseEntered
- btnInThanhExel1.setBackground(Color.pink);         // TODO add your handling code here:
+        btnInThanhExel1.setBackground(Color.pink);         // TODO add your handling code here:
     }//GEN-LAST:event_btnInThanhExel1MouseEntered
 
     private void btnInThanhExel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInThanhExel1MouseExited
         // TODO add your handling code here:
-          btnInThanhExel1.setBackground(new Color(153, 153, 255)); 
+        btnInThanhExel1.setBackground(new Color(153, 153, 255));
     }//GEN-LAST:event_btnInThanhExel1MouseExited
 
     private void btnInThanhExel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInThanhExel1ActionPerformed
         // TODO add your handling code here:
         btnInDanhSach();
     }//GEN-LAST:event_btnInThanhExel1ActionPerformed
+
+    private void cboDieuKienLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboDieuKienLocActionPerformed
+        // TODO add your handling code here:
+        String name = (String) cboDieuKienLoc.getSelectedItem();
+        tblmodel.setRowCount(0);
+        if (name.equalsIgnoreCase("Trưởng phòng")) {
+
+            for (O_NhanVien nv : list) {
+//            String ct = "";
+//            if (nv.isVaiTro()) {
+//                ct = "Trưởng phòng";
+//            } else {
+//                ct = "Nhân viên";
+//            }
+                if (nv.isVaiTro()) {
+                    Object[] tbl = new Object[]{nv.getMaNV(), nv.isVaiTro() ? "Trưởng phòng" : "Nhân viên", nv.getHoTen()};
+                    tblmodel.addRow(tbl);
+                }
+            }
+        }else if(name.equalsIgnoreCase("Nhân viên")){
+                        for (O_NhanVien nv : list) {
+//            String ct = "";
+//            if (nv.isVaiTro()) {
+//                ct = "Trưởng phòng";
+//            } else {
+//                ct = "Nhân viên";
+//            }
+                if (nv.isVaiTro()==false) {
+                    Object[] tbl = new Object[]{nv.getMaNV(), nv.isVaiTro() ? "Trưởng phòng" : "Nhân viên", nv.getHoTen()};
+                    tblmodel.addRow(tbl);
+                }
+            }
+        }else{
+            Duyet();
+        }
+    }//GEN-LAST:event_cboDieuKienLocActionPerformed
     public void btnInDanhSach() {
         try {
             JFileChooser jFileChooser = new JFileChooser();
@@ -934,6 +988,7 @@ public class NhanVien extends javax.swing.JPanel {
     private com.tuandhpc05076.Swing.Button btnTimKiem;
     private com.tuandhpc05076.Swing.Button btnToi;
     private com.tuandhpc05076.Swing.Button btnXoa;
+    private com.tuandhpc05076.Swing.Combobox cboDieuKienLoc;
     private com.tuandhpc05076.Swing.Combobox cboVaiTro;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

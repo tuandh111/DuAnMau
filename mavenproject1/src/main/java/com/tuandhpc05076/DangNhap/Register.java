@@ -46,6 +46,7 @@ public class Register extends PanelCustom {
         }
         if (!new String(txtMatKhauMoi.getPassword()).equals(new String(txtMatKhauMoi2.getPassword()))) {
             JOptionPane.showMessageDialog(this, "Nhập lại mật khẩu không thành công");
+            return false;
         }
         return true;
     }
@@ -60,7 +61,6 @@ public class Register extends PanelCustom {
             String sqla = "UPDATE dbo.NhanVien SET MatKhau =?  WHERE MaNV =? and MatKhau=? ";
             PreparedStatement st = con.prepareStatement(sqla);
             boolean kiemMa = false;
-            boolean kiemPass = false;
             String maHoaMatKhau = mh.toSHA(new String(txtMatKhau.getPassword()));
             String maHoaMatKhauMoi=mh.toSHA(new String(txtMatKhauMoi.getPassword()));
             for (O_NhanVien nv : listNV) {
@@ -77,14 +77,15 @@ public class Register extends PanelCustom {
                     txtMatKhauMoi.setText("");
                     txtMatKhauMoi2.setText("");
                     JOptionPane.showMessageDialog(this, "Thay đổi mật khẩu thành công");
+                    loadDataToArray();
                     kiemMa = true;
-                    kiemPass=false;
+                 
                     break;
                 }
 
             }
 
-            if (kiemMa == false || kiemPass == true) {
+            if (kiemMa == false ) {
                 JOptionPane.showMessageDialog(this, "Tài khoản hoặc mật khẩu không chính xác");
              
             }

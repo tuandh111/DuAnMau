@@ -37,6 +37,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -447,6 +448,7 @@ public class ChuyenDe extends javax.swing.JPanel {
         txtTimKiem = new com.tuandhpc05076.Swing.TextField1();
         btnTimKiem = new com.tuandhpc05076.Swing.Button();
         btnInThanhExel = new com.tuandhpc05076.Swing.Button();
+        cboDieuKienLoc = new com.tuandhpc05076.Swing.Combobox();
 
         fileChooser.setCurrentDirectory(new java.io.File("C:\\Users\\DELL E5470\\Pictures\\Screenshots"));
         fileChooser.setMinimumSize(new java.awt.Dimension(1000, 500));
@@ -780,33 +782,46 @@ public class ChuyenDe extends javax.swing.JPanel {
             }
         });
 
+        cboDieuKienLoc.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tăng", "Giảm" }));
+        cboDieuKienLoc.setSelectedIndex(-1);
+        cboDieuKienLoc.setLabeText("Sắp xếp học phí theo");
+        cboDieuKienLoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboDieuKienLocActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 853, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(txtTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnInThanhExel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnInThanhExel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(cboDieuKienLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)))
                 .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 865, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboDieuKienLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(btnInThanhExel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
         );
@@ -1034,32 +1049,51 @@ public class ChuyenDe extends javax.swing.JPanel {
 
         int chon = tblUser.getSelectedRow();
         String name = (String) tblModel.getValueAt(chon, 0);
-        if(evt.getClickCount()==2){
-        for (O_ChuyenDe cd : listCD) {
-            if (cd.getMaCD().trim().equals(name)) {
-                txtMaChuyenDe.setText(cd.getMaCD());
-                txtMaChuyenDe.setEditable(false);
-                txtTenChuyenDe.setText(cd.getTenCD());
-                txtHocPhi.setText(String.valueOf(cd.getHocPhi()));
-                txtThoiLuongGio.setText(String.valueOf(cd.getThoiLuong()));
-                if (cd.getHinh().equals("No Avatar")) {
-                    txtAnh.setText("No Avatar");
-                    txtAnh.setIcon(null);
-                } else {
-                    txtAnh.setText("");
-                    ImageIcon imgic = new ImageIcon(getClass().getResource("/com/tuandhpc05076/Image/" + cd.getHinh()));
-                    Image img = imgic.getImage();
-                    int Width = txtAnh.getWidth();
-                    int Height = txtAnh.getHeight();
-                    txtAnh.setIcon(new ImageIcon(img.getScaledInstance(Width, Height, 0)));
+        if (evt.getClickCount() == 2) {
+            for (O_ChuyenDe cd : listCD) {
+                if (cd.getMaCD().trim().equals(name)) {
+                    txtMaChuyenDe.setText(cd.getMaCD());
+                    txtMaChuyenDe.setEditable(false);
+                    txtTenChuyenDe.setText(cd.getTenCD());
+                    txtHocPhi.setText(String.valueOf(cd.getHocPhi()));
+                    txtThoiLuongGio.setText(String.valueOf(cd.getThoiLuong()));
+                    if (cd.getHinh().equals("No Avatar")) {
+                        txtAnh.setText("No Avatar");
+                        txtAnh.setIcon(null);
+                    } else {
+                        txtAnh.setText("");
+                        ImageIcon imgic = new ImageIcon(getClass().getResource("/com/tuandhpc05076/Image/" + cd.getHinh()));
+                        Image img = imgic.getImage();
+                        int Width = txtAnh.getWidth();
+                        int Height = txtAnh.getHeight();
+                        txtAnh.setIcon(new ImageIcon(img.getScaledInstance(Width, Height, 0)));
 
+                    }
+                    txtMoTa.setText(cd.getMoTa());
                 }
-                txtMoTa.setText(cd.getMoTa());
             }
-        }
-        jTabbedPane1.setSelectedIndex(0);
+            jTabbedPane1.setSelectedIndex(0);
         }        // TODO add your handling code here:
     }//GEN-LAST:event_tblUserMousePressed
+
+    private void cboDieuKienLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboDieuKienLocActionPerformed
+        // TODO add your handling code here:
+        O_DangNhap dn = listDangNhap.get(0);
+        String name = (String) cboDieuKienLoc.getSelectedItem();
+        if (name == null) {
+            return;
+        }
+        if (name.equalsIgnoreCase("Tăng")) {
+            Collections.sort(listCD, (sv1, sv2) -> (int) (sv1.getHocPhi() - sv2.getHocPhi()));
+//        Collections.reverse(list);
+            Duyet();
+        } else {
+            Collections.sort(listCD, (sv1, sv2) -> (int) (sv1.getHocPhi() - sv2.getHocPhi()));
+            Collections.reverse(listCD);
+            Duyet();
+        }
+
+    }//GEN-LAST:event_cboDieuKienLocActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1073,6 +1107,7 @@ public class ChuyenDe extends javax.swing.JPanel {
     private com.tuandhpc05076.Swing.Button btnTimKiem;
     private com.tuandhpc05076.Swing.Button btnToi;
     private com.tuandhpc05076.Swing.Button btnXoa;
+    private com.tuandhpc05076.Swing.Combobox cboDieuKienLoc;
     private javax.swing.JFileChooser fileChooser;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
