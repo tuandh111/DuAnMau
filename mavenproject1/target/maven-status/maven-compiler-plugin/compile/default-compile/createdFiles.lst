@@ -4,6 +4,7 @@ com\tuandhpc05076\BieuDo\CurveChart.class
 com\tuandhpc05076\Form\KhoaHoc$4.class
 com\tuandhpc05076\Demo\NhanVienJrame$11.class
 com\tuandhpc05076\Main\Main$5.class
+com\tuandhpc05076\Dao\ThongKeDAO.class
 com\tuandhpc05076\Main\Main$11.class
 com\tuandhpc05076\Demo\NhanVienJrame$3.class
 com\tuandhpc05076\Form\NhanVien$9.class
@@ -13,7 +14,7 @@ com\tuandhpc05076\Form\ColorOption$1.class
 com\tuandhpc05076\Object\O_ChuyenDe.class
 com\tuandhpc05076\Form\NguoiHoc$13.class
 com\tuandhpc05076\Demo\thongKeJframe$4.class
-com\tuandhpc05076\dao\NguoiHocDAO.class
+com\tuandhpc05076\Dao\ChuyenDeDAO.class
 com\tuandhpc05076\Demo\NguoiHocJframe$8.class
 com\tuandhpc05076\Form\HocVien$5.class
 com\tuandhpc05076\Swing\TextImage.class
@@ -37,7 +38,6 @@ com\tuandhpc05076\Form\NguoiHoc$18.class
 com\tuandhpc05076\Demo\DoiMatKhau$1.class
 com\tuandhpc05076\helper\ShareHelper.class
 com\tuandhpc05076\Form\Setting_Form$2.class
-com\tuandhpc05076\dao\ThongKeDAO.class
 com\tuandhpc05076\BieuDo\LegendItem.class
 com\tuandhpc05076\swing0\ScrollBarCustom.class
 com\tuandhpc05076\Form\ColorOption$3.class
@@ -58,7 +58,6 @@ com\tuandhpc05076\Form\KhoaHoc$12.class
 com\tuandhpc05076\Main\Main$18.class
 com\tuandhpc05076\Form\KhoaHoc$14.class
 com\tuandhpc05076\Form\HocVien$8.class
-com\tuandhpc05076\dao\ChuyenDeDAO.class
 com\tuandhpc05076\BieuDo\ModelLegend.class
 com\tuandhpc05076\Form\ChuyenDe$3.class
 com\tuandhpc05076\Main\Main$3.class
@@ -66,6 +65,7 @@ com\tuandhpc05076\swing0\ThemeColorChange.class
 com\tuandhpc05076\Form\NguoiHoc$6.class
 com\tuandhpc05076\DangNhap\EventLogin.class
 com\tuandhpc05076\Swing\TextArea$2.class
+com\tuandhpc05076\Form\NhanVien$23.class
 com\tuandhpc05076\Form\Home_Form.class
 com\tuandhpc05076\swing0\EventColorChange.class
 com\tuandhpc05076\Demo\NguoiHocJframe.class
@@ -73,11 +73,13 @@ com\tuandhpc05076\Form\NhanVien$17.class
 com\tuandhpc05076\BieuDo\CurveChart$2.class
 com\tuandhpc05076\Form\HocVien$16.class
 com\tuandhpc05076\swing0\Header$1.class
+com\tuandhpc05076\Form\NhanVien$21.class
 com\tuandhpc05076\ChuongTrinh\Menu$2.class
 com\tuandhpc05076\Form\KhoaHoc$7.class
 com\tuandhpc05076\Main\Main$8.class
 com\tuandhpc05076\Form\ThongKeDoanhThu.class
 com\tuandhpc05076\Form\NguoiHoc$10.class
+com\tuandhpc05076\Form\KhoaHoc$16.class
 com\tuandhpc05076\Demo\dangNhapJfame$1.class
 com\tuandhpc05076\Main\Main$19.class
 com\tuandhpc05076\Demo\demo.class
@@ -94,6 +96,7 @@ com\tuandhpc05076\Form\ChuyenDe$14.class
 com\tuandhpc05076\Form\ChuyenDe$22.class
 com\tuandhpc05076\Form\ThongKeKhoaHoc.class
 com\tuandhpc05076\BieuDo\LabelColor.class
+com\tuandhpc05076\Dao\NguoiHocDAO.class
 com\tuandhpc05076\Form\imgBackgroudOption$3.class
 com\tuandhpc05076\Demo\NguoiHocJframe$10.class
 com\tuandhpc05076\Main\Main$20.class
@@ -104,9 +107,10 @@ com\tuandhpc05076\Form\ChuyenDe$15.class
 com\tuandhpc05076\DangNhap\Register$2.class
 com\tuandhpc05076\DangNhap\Main$1.class
 com\tuandhpc05076\swing0\SystemProperties.class
+com\tuandhpc05076\Form\NguoiHoc$22.class
 com\tuandhpc05076\Form\NhanVien$13.class
 com\tuandhpc05076\Form\ChuyenDe$6.class
-com\tuandhpc05076\dao\HocVienDAO.class
+com\tuandhpc05076\Form\NhanVien$20.class
 com\tuandhpc05076\Form\KhoaHoc$1.class
 com\tuandhpc05076\Main\Main$7.class
 com\tuandhpc05076\Main\Main$21.class
@@ -117,6 +121,7 @@ com\tuandhpc05076\Form\KhoaHoc$2.class
 com\tuandhpc05076\Form\NhanVien$14.class
 com\tuandhpc05076\Form\imgBackgroudOption$1.class
 com\tuandhpc05076\DangNhap\LoginAndRegister$3.class
+com\tuandhpc05076\Dao\HocVienDAO.class
 com\tuandhpc05076\DangNhap\LoginAndRegister.class
 com\tuandhpc05076\Main\Main$12.class
 com\tuandhpc05076\Form\ChuyenDe$8.class
@@ -146,13 +151,13 @@ com\tuandhpc05076\ThoiGian\Time.class
 com\tuandhpc05076\Swing\TextField$2.class
 com\tuandhpc05076\Form\NguoiHoc$14.class
 com\tuandhpc05076\Form\ChuyenDe$9.class
-com\tuandhpc05076\dao\NhanVienDAO.class
 com\tuandhpc05076\DangNhap\LoginAndRegister$4.class
 com\tuandhpc05076\swing0\ThemeColorChange$Mode.class
 com\tuandhpc05076\Swing\TextField$1.class
 com\tuandhpc05076\Form\ChuyenDe$19.class
 com\tuandhpc05076\Main\Main$13.class
 com\tuandhpc05076\Form\KhoaHoc$5.class
+com\tuandhpc05076\Form\ChuyenDe$24.class
 com\tuandhpc05076\Form\NhanVien$11.class
 com\tuandhpc05076\Swing\PasswordField$4.class
 com\tuandhpc05076\Form\ChuyenDe$17.class
@@ -167,6 +172,7 @@ com\tuandhpc05076\Demo\thongKeJframe$3.class
 com\tuandhpc05076\swing0\Button.class
 com\tuandhpc05076\DangNhap\LoginAndRegister$2.class
 com\tuandhpc05076\Form\NguoiHoc$19.class
+com\tuandhpc05076\Dao\NhanVienDAO.class
 com\tuandhpc05076\Form\ChuyenDe$4.class
 com\tuandhpc05076\Form\HocVien$4.class
 com\tuandhpc05076\Form\NguoiHoc$5.class
@@ -205,8 +211,8 @@ com\tuandhpc05076\Form\HocVien$15.class
 com\tuandhpc05076\Object\O_NguoiHocTungNam.class
 com\tuandhpc05076\Demo\DoiMatKhau$2.class
 com\tuandhpc05076\ChuongTrinh\Menu$1.class
+com\tuandhpc05076\Dao\KhoaHocDAO.class
 com\tuandhpc05076\BieuDo\CurveChart$1.class
-com\tuandhpc05076\dao\KhoaHocDAO.class
 com\tuandhpc05076\swing0\ModernScrollBarUI.class
 com\tuandhpc05076\Form\ThongKeChuyenDe.class
 com\tuandhpc05076\Form\HocVien.class
@@ -227,6 +233,7 @@ com\tuandhpc05076\Form\HocVien$9.class
 com\tuandhpc05076\Object\O_DangNhap.class
 com\tuandhpc05076\Form\KhoaHoc$13.class
 com\tuandhpc05076\Swing\ScrollBarCustom.class
+com\tuandhpc05076\Form\NhanVien$22.class
 com\tuandhpc05076\Swing\TextArea$1.class
 com\tuandhpc05076\DangNhap\quenMatKhau$1.class
 com\tuandhpc05076\Main\Main$4.class
