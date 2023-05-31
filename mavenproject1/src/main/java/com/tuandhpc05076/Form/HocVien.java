@@ -143,7 +143,7 @@ public class HocVien extends javax.swing.JPanel {
                 return;
             }
             String[] ten = name.split("-");
-           
+
             st.setString(1, ten[1]);
 
             ResultSet rs = st.executeQuery();
@@ -540,12 +540,17 @@ public class HocVien extends javax.swing.JPanel {
             }
         });
 
-        txtTimKiemHV.setHint("Nhập mã cần tìm kiếm");
+        txtTimKiemHV.setHint("Nhập mã người học cần tìm kiếm");
+        txtTimKiemHV.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtTimKiemHVCaretUpdate(evt);
+            }
+        });
 
         btnTimKiemHV.setBackground(new java.awt.Color(153, 153, 255));
         btnTimKiemHV.setForeground(new java.awt.Color(255, 255, 255));
         btnTimKiemHV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/tuandhpc05076/icon1/search.png"))); // NOI18N
-        btnTimKiemHV.setText("Tìm kiếm");
+        btnTimKiemHV.setText("Tìm kiếm theo mã HV");
         btnTimKiemHV.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnTimKiemHVMouseEntered(evt);
@@ -822,7 +827,7 @@ public class HocVien extends javax.swing.JPanel {
         int i = 0;
         boolean kiem1 = false;
         for (O_HocVien hv : listHV) {
-            if (hv.getMaNH().equals(txtTimKiemHV.getText())) {
+            if (hv.getMaHV() == Integer.parseInt(txtTimKiemHV.getText())) {
                 tblHocVien.setRowSelectionInterval(i, i);
                 JOptionPane.showMessageDialog(this, "Đã tìm thấy");
                 kiem1 = true;
@@ -837,24 +842,47 @@ public class HocVien extends javax.swing.JPanel {
     private void cboDieuKienLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboDieuKienLocActionPerformed
         // TODO add your handling code here:
         O_DangNhap dn = listDangNhap.get(0);
-        if(cboKhoaHoc.getSelectedItem()==null){
-           JOptionPane.showMessageDialog(this,"Khóa học chưa chọn");
-           return;
+        if (cboKhoaHoc.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(this, "Khóa học chưa chọn");
+            return;
         }
         String name = (String) cboDieuKienLoc.getSelectedItem();
         if (name == null) {
             return;
         }
         if (name.equalsIgnoreCase("Tăng")) {
-            Collections.sort(listHV, (sv1, sv2) -> (int) (sv1.getDiem()- sv2.getDiem()));
+            Collections.sort(listHV, (sv1, sv2) -> (int) (sv1.getDiem() - sv2.getDiem()));
             //        Collections.reverse(list);
             DuyetHocVien();
         } else {
-            Collections.sort(listHV, (sv1, sv2) -> (int) (sv1.getDiem()- sv2.getDiem()));
+            Collections.sort(listHV, (sv1, sv2) -> (int) (sv1.getDiem() - sv2.getDiem()));
             Collections.reverse(listHV);
             DuyetHocVien();
         }
     }//GEN-LAST:event_cboDieuKienLocActionPerformed
+
+    private void txtTimKiemHVCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimKiemHVCaretUpdate
+        // TODO add your handling code here:
+        try {
+            Integer.parseInt(txtTimKiemHV.getText());
+            loadDataToArrayBangHocVien();
+            DuyetHocVien();
+            return;
+        } catch (Exception e) {
+            
+        }
+        String name = txtTimKiemHV.getText();
+        if (name == null) {
+            return;
+        }
+        tblmodel.setRowCount(0);
+        for (O_HocVien hv : listHV) {
+            if (hv.getMaNH().startsWith(name)) {
+                Object[] tbl = new Object[]{hv.getMaHV(), hv.getMaNH(), hv.getHoVaTen(), hv.getDiem()};
+                tblmodel.addRow(tbl);
+            }
+        }
+    }//GEN-LAST:event_txtTimKiemHVCaretUpdate
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

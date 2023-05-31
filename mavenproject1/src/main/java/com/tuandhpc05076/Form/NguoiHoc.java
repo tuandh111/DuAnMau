@@ -748,6 +748,11 @@ public class NguoiHoc extends javax.swing.JPanel {
                 txtTimKiemCaretUpdate(evt);
             }
         });
+        txtTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTimKiemActionPerformed(evt);
+            }
+        });
 
         btnTimKiem.setBackground(new java.awt.Color(153, 153, 255));
         btnTimKiem.setForeground(new java.awt.Color(255, 255, 255));
@@ -1088,6 +1093,10 @@ public class NguoiHoc extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_txtTimKiemCaretUpdate
+
+    private void txtTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTimKiemActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
