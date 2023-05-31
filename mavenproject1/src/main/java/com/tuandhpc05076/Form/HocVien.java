@@ -40,6 +40,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Collections;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -362,6 +363,7 @@ public class HocVien extends javax.swing.JPanel {
         btnXoaKhoiKhoaHoc1 = new com.tuandhpc05076.Swing.Button();
         txtTimKiemHV = new com.tuandhpc05076.Swing.TextField1();
         btnTimKiemHV = new com.tuandhpc05076.Swing.Button();
+        cboDieuKienLoc = new com.tuandhpc05076.Swing.Combobox();
         cboChuyenDe = new com.tuandhpc05076.Swing.Combobox();
         cboKhoaHoc = new com.tuandhpc05076.Swing.Combobox();
 
@@ -558,6 +560,15 @@ public class HocVien extends javax.swing.JPanel {
             }
         });
 
+        cboDieuKienLoc.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tăng", "Giảm" }));
+        cboDieuKienLoc.setSelectedIndex(-1);
+        cboDieuKienLoc.setLabeText("Sắp xếp điểm theo");
+        cboDieuKienLoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboDieuKienLocActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -573,8 +584,10 @@ public class HocVien extends javax.swing.JPanel {
                         .addComponent(btnXoaKhoiKhoaHoc1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCapNhatDiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(txtTimKiemHV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(cboDieuKienLoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtTimKiemHV, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnTimKiemHV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -582,10 +595,11 @@ public class HocVien extends javax.swing.JPanel {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(11, 11, 11)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTimKiemHV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTimKiemHV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnTimKiemHV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboDieuKienLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -820,6 +834,28 @@ public class HocVien extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnTimKiemHVActionPerformed
 
+    private void cboDieuKienLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboDieuKienLocActionPerformed
+        // TODO add your handling code here:
+        O_DangNhap dn = listDangNhap.get(0);
+        if(cboKhoaHoc.getSelectedItem()==null){
+           JOptionPane.showMessageDialog(this,"Khóa học chưa chọn");
+           return;
+        }
+        String name = (String) cboDieuKienLoc.getSelectedItem();
+        if (name == null) {
+            return;
+        }
+        if (name.equalsIgnoreCase("Tăng")) {
+            Collections.sort(listHV, (sv1, sv2) -> (int) (sv1.getDiem()- sv2.getDiem()));
+            //        Collections.reverse(list);
+            DuyetHocVien();
+        } else {
+            Collections.sort(listHV, (sv1, sv2) -> (int) (sv1.getDiem()- sv2.getDiem()));
+            Collections.reverse(listHV);
+            DuyetHocVien();
+        }
+    }//GEN-LAST:event_cboDieuKienLocActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.tuandhpc05076.Swing.Button btnCapNhatDiem;
@@ -829,6 +865,7 @@ public class HocVien extends javax.swing.JPanel {
     private com.tuandhpc05076.Swing.Button btnXoaKhoiKhoaHoc1;
     private com.tuandhpc05076.Swing.Button button10;
     private com.tuandhpc05076.Swing.Combobox cboChuyenDe;
+    private com.tuandhpc05076.Swing.Combobox cboDieuKienLoc;
     private com.tuandhpc05076.Swing.Combobox cboKhoaHoc;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
