@@ -742,12 +742,17 @@ public class NguoiHoc extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblUser);
 
-        txtTimKiem.setHint("Nhập mã cần tìm kiếm");
+        txtTimKiem.setHint("Tìm kiếm");
+        txtTimKiem.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtTimKiemCaretUpdate(evt);
+            }
+        });
 
         btnTimKiem.setBackground(new java.awt.Color(153, 153, 255));
         btnTimKiem.setForeground(new java.awt.Color(255, 255, 255));
         btnTimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/tuandhpc05076/icon1/search.png"))); // NOI18N
-        btnTimKiem.setText("Tìm kiếm");
+        btnTimKiem.setText("Tìm kiếm theo mã");
         btnTimKiem.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnTimKiemMouseEntered(evt);
@@ -1036,9 +1041,9 @@ public class NguoiHoc extends javax.swing.JPanel {
                     tblmodel.addRow(tbl);
                 }
             }
-        }else if(name.equals("Nữ")){
-               for (O_NguoiHoc nh : listNH) {
-                if (nh.isGioiTinh()==false) {
+        } else if (name.equals("Nữ")) {
+            for (O_NguoiHoc nh : listNH) {
+                if (nh.isGioiTinh() == false) {
                     String gt = "";
                     if (nh.isGioiTinh()) {
                         gt = "Nam";
@@ -1049,10 +1054,40 @@ public class NguoiHoc extends javax.swing.JPanel {
                     tblmodel.addRow(tbl);
                 }
             }
-        }else{
+        } else {
             Duyet();
         }
     }//GEN-LAST:event_cboVaiTroActionPerformed
+
+    private void txtTimKiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimKiemCaretUpdate
+        // TODO add your handling code here:
+        String timKiem = txtTimKiem.getText();
+        if(timKiem==null){
+            return;
+        }if(timKiem.equals("")){
+            Duyet();
+        }
+        if(timKiem.matches(manv)){
+            Duyet();
+           return;
+        }
+         tblmodel.setRowCount(0);
+        for (O_NguoiHoc nh : listNH) {
+            if (nh.getHoTen().startsWith(timKiem)) {
+               
+
+                String gt = "";
+                if (nh.isGioiTinh()) {
+                    gt = "Nam";
+                } else {
+                    gt = "Nữ";
+                }
+                Object[] tbl = new Object[]{nh.getMaNH(), nh.getHoTen(), gt, nh.getNgaySinh(), nh.getDienThoai(), nh.getEmail(), nh.getGhiChu(), nh.getMaNV(), nh.getNgayDK()};
+                tblmodel.addRow(tbl);
+            }
+        }
+
+    }//GEN-LAST:event_txtTimKiemCaretUpdate
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

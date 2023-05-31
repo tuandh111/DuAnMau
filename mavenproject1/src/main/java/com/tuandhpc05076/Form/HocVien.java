@@ -805,17 +805,10 @@ public class HocVien extends javax.swing.JPanel {
 
     private void btnTimKiemHVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemHVActionPerformed
         // TODO add your handling code here:
-        try {
-            Integer.parseInt(txtTimKiemHV.getText());
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Không phải là số");
-            return;
-
-        }
         int i = 0;
         boolean kiem1 = false;
         for (O_HocVien hv : listHV) {
-            if (hv.getMaHV() == Integer.parseInt(txtTimKiemHV.getText())) {
+            if (hv.getMaNH().equals(txtTimKiemHV.getText())) {
                 tblHocVien.setRowSelectionInterval(i, i);
                 JOptionPane.showMessageDialog(this, "Đã tìm thấy");
                 kiem1 = true;
