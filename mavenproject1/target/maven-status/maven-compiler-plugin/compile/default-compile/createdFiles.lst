@@ -42,6 +42,7 @@ com\tuandhpc05076\BieuDo\LegendItem.class
 com\tuandhpc05076\swing0\ScrollBarCustom.class
 com\tuandhpc05076\Form\ColorOption$3.class
 com\tuandhpc05076\Swing\Combobox$ComboUI$4.class
+com\tuandhpc05076\Form\HocVien$18.class
 com\tuandhpc05076\Swing\TextField1.class
 com\tuandhpc05076\Main\Main$22.class
 com\tuandhpc05076\Form\NguoiHoc$4.class
@@ -51,6 +52,7 @@ com\tuandhpc05076\Form\ChuyenDe$13.class
 com\tuandhpc05076\Form\NhanVien$15.class
 com\tuandhpc05076\swing0\ThemeColor.class
 com\tuandhpc05076\Swing\Button.class
+com\tuandhpc05076\Form\NguoiHoc$24.class
 com\tuandhpc05076\BieuDo\FormHome.class
 com\tuandhpc05076\DangNhap\Login$2.class
 com\tuandhpc05076\Swing\Combobox$ComboUI$ArrowButton.class
@@ -119,6 +121,7 @@ com\tuandhpc05076\Form\NguoiHoc$11.class
 com\tuandhpc05076\Form\ChuyenDe$21.class
 com\tuandhpc05076\Form\KhoaHoc$2.class
 com\tuandhpc05076\Form\NhanVien$14.class
+com\tuandhpc05076\Form\NguoiHoc$23.class
 com\tuandhpc05076\Form\imgBackgroudOption$1.class
 com\tuandhpc05076\DangNhap\LoginAndRegister$3.class
 com\tuandhpc05076\Dao\HocVienDAO.class
@@ -170,6 +173,7 @@ com\tuandhpc05076\helper\DialogHelper.class
 com\tuandhpc05076\swing0\EventSwitchSelected.class
 com\tuandhpc05076\Demo\thongKeJframe$3.class
 com\tuandhpc05076\swing0\Button.class
+com\tuandhpc05076\Form\HocVien$17.class
 com\tuandhpc05076\DangNhap\LoginAndRegister$2.class
 com\tuandhpc05076\Form\NguoiHoc$19.class
 com\tuandhpc05076\Dao\NhanVienDAO.class

@@ -34,7 +34,10 @@ import com.tuandhpc05076.helper.ShareHelper;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import java.net.URI;
+import java.net.URL;
 import java.time.Clock;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -516,6 +519,11 @@ public class Main extends javax.swing.JFrame {
 
         jMenuItem16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/tuandhpc05076/Image/training.png"))); // NOI18N
         jMenuItem16.setText("Giới thiệu sản phẩm");
+        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem16ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem16);
 
         jMenuItem17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/tuandhpc05076/icon1/2.png"))); // NOI18N
@@ -626,6 +634,12 @@ public class Main extends javax.swing.JFrame {
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
         // TODO add your handling code here:
+             Desktop d = Desktop.getDesktop();
+        try {
+            d.browse(new URI("https://niithanoi.edu.vn/lap-trinh-java-co-ban-voi-eclipse.html"));
+        } catch (Exception e2) {
+            e2.printStackTrace();
+        }
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     private void txtAPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAPMouseClicked
@@ -692,6 +706,15 @@ public class Main extends javax.swing.JFrame {
     private void txtTuyenSinhMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTuyenSinhMouseEntered
         txtTuyenSinh.setForeground(Color.yellow);         // TODO add your handling code here:
     }//GEN-LAST:event_txtTuyenSinhMouseEntered
+
+    private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
+      try {
+            Desktop.getDesktop().browse(new File("Help/index.html").toURI());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+          JOptionPane.showMessageDialog(this,"Không tìm thấy file trong máy");
+        }      // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem16ActionPerformed
 
     /**
      * @param args the command line arguments
