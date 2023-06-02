@@ -14,7 +14,7 @@ import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
-
+import org.jdesktop.animation.timing.TimingTarget;
 
 /**
  *
@@ -72,15 +72,15 @@ public class LoginAndRegister extends javax.swing.JPanel {
         setLayout(layout);
         register = new Register();
         login = new Login();
-        applyEvent(register, true);
-        applyEvent(login, false);
+        applyEvent(register, false);
+        applyEvent(login, true);
         add(register, "pos (50%)-290px 0.5al n n");
         add(login, "pos (50%)-10px 0.5al n n");
         register.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent me) {
                 if (SwingUtilities.isLeftMouseButton(me)) {
-                    showLogin(false);
+                    showLogin(true);
                     requestFocus();
                 }
             }
@@ -89,7 +89,7 @@ public class LoginAndRegister extends javax.swing.JPanel {
             @Override
             public void mousePressed(MouseEvent me) {
                 if (SwingUtilities.isLeftMouseButton(me)) {
-                    showLogin(true);
+                    showLogin(false);
                     requestFocus();
                 }
             }
