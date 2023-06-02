@@ -79,7 +79,7 @@ public class LoginAndRegister extends javax.swing.JPanel {
             @Override
             public void mousePressed(MouseEvent me) {
                 if (SwingUtilities.isLeftMouseButton(me)) {
-                    showLogin(false);
+                    showLogin(true);
                     requestFocus();
                 }
             }
@@ -88,7 +88,7 @@ public class LoginAndRegister extends javax.swing.JPanel {
             @Override
             public void mousePressed(MouseEvent me) {
                 if (SwingUtilities.isLeftMouseButton(me)) {
-                    showLogin(true);
+                    showLogin(false);
                     requestFocus();
                 }
             }

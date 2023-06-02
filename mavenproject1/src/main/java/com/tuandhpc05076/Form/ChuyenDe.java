@@ -230,6 +230,7 @@ public class ChuyenDe extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Mô tả của bạn đã để trống");
             return false;
         }
+   
         return true;
     }
 

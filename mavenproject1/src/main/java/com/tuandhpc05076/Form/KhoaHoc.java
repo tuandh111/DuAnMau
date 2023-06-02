@@ -145,8 +145,18 @@ public class KhoaHoc extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Ngày khai giảng không đúng định dạng\nyyyy-MM-dd VD:2022-01-22");
             return false;
         }
-        if (txtGhiChu1.getText().equals("")) {
+        if (txtLopHoc.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Lớp học của bạn đã để trống");
+            return false;
+        }
+             boolean kiemMoTa= false;
+        for (O_KhoaHoc kh : listKH) {
+            if(kh.getGhiChu().trim().equalsIgnoreCase(txtLopHoc.getText())){
+                kiemMoTa=true;
+            }
+        }
+        if(kiemMoTa==true){
+            JOptionPane.showMessageDialog(this, "Lớp học bạn đã tồn tại trong danh sách");
             return false;
         }
         return true;
@@ -154,7 +164,7 @@ public class KhoaHoc extends javax.swing.JPanel {
 
     public void btnNew() {
         txtNgayKhaiGiang.setText("");
-        txtGhiChu.setText("");
+        txtLopHoc.setText("");
     }
 
     public void btnInDanhSach() {
@@ -231,7 +241,7 @@ public class KhoaHoc extends javax.swing.JPanel {
             st.setFloat(2, Float.parseFloat(txtHocPhi.getText()));
             st.setInt(3, Integer.parseInt(txtThoiLuongGio.getText()));
             st.setString(4, txtNgayKhaiGiang.getText());
-            st.setString(5, txtGhiChu1.getText());
+            st.setString(5, txtLopHoc.getText());
             st.setString(6, txtThemBoi.getText());
             Date now = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -307,7 +317,7 @@ public class KhoaHoc extends javax.swing.JPanel {
             PreparedStatement st = con.prepareStatement(sqla);
             st.setString(1, txtNgayKhaiGiang.getText());
             st.setString(2, txtNgayTao.getText());
-            st.setString(3, txtGhiChu.getText());
+            st.setString(3, txtLopHoc.getText());
             st.setInt(4, name);
 
             st.executeUpdate();
@@ -352,7 +362,7 @@ public class KhoaHoc extends javax.swing.JPanel {
         btnXoa = new com.tuandhpc05076.Swing.Button();
         btnSua = new com.tuandhpc05076.Swing.Button();
         btnThem = new com.tuandhpc05076.Swing.Button();
-        txtGhiChu = new com.tuandhpc05076.Swing.TextField();
+        txtLopHoc = new com.tuandhpc05076.Swing.TextField();
         txtGhiChu1 = new com.tuandhpc05076.Swing.TextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -476,8 +486,8 @@ public class KhoaHoc extends javax.swing.JPanel {
             }
         });
 
-        txtGhiChu.setBackground(new java.awt.Color(255, 255, 255));
-        txtGhiChu.setLabelText("Lớp học");
+        txtLopHoc.setBackground(new java.awt.Color(255, 255, 255));
+        txtLopHoc.setLabelText("Lớp học");
 
         txtGhiChu1.setBackground(new java.awt.Color(255, 255, 255));
         txtGhiChu1.setLabelText("Ghi chú");
@@ -522,7 +532,7 @@ public class KhoaHoc extends javax.swing.JPanel {
                             .addComponent(txtThemBoi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
                             .addComponent(txtHocPhi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtTenChuyenDe, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtGhiChu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txtLopHoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtGhiChu1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -549,7 +559,7 @@ public class KhoaHoc extends javax.swing.JPanel {
                     .addComponent(txtNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtGhiChu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtLopHoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtGhiChu1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(116, 116, 116)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -831,7 +841,7 @@ public class KhoaHoc extends javax.swing.JPanel {
             if (Integer.parseInt(txtTimKiem.getText()) == kh.getMaKH()) {
                 txtNgayKhaiGiang.setText(kh.getNgayKhaiGiang());
                 txtNgayTao.setText(kh.getNgayTao());
-                txtGhiChu.setText(kh.getGhiChu());
+                txtLopHoc.setText(kh.getGhiChu());
                 JOptionPane.showMessageDialog(this, "Đã tìm thấy");
                 kiem = true;
                 jTabbedPane1.setSelectedIndex(0);
@@ -863,7 +873,7 @@ public class KhoaHoc extends javax.swing.JPanel {
                 if (kh.getMaKH() == name) {
                     txtNgayKhaiGiang.setText(kh.getNgayKhaiGiang());
                     txtNgayTao.setText(kh.getNgayTao());
-                    txtGhiChu.setText(kh.getGhiChu());
+                    txtLopHoc.setText(kh.getGhiChu());
                 }
             }
             jTabbedPane1.setSelectedIndex(0);
@@ -901,7 +911,7 @@ public class KhoaHoc extends javax.swing.JPanel {
             for (O_KhoaHoc nv : listKH) {
                 String ngay = nv.getNgayKhaiGiang();
                 String[] ngay1 = ngay.split("-");
-                if (Integer.parseInt(ngay1[1]) < 13&&Integer.parseInt(ngay1[1]) >9) {
+                if (Integer.parseInt(ngay1[1]) < 13&&Integer.parseInt(ngay1[1]) >=9) {
                     Object[] tbl = new Object[]{nv.getMaKH(), nv.getThoiLuong(), nv.getHocPhi(), nv.getNgayKhaiGiang(), nv.getThemBoi(), nv.getNgayTao()};
                     tblModel.addRow(tbl);
                 }
@@ -936,9 +946,9 @@ public class KhoaHoc extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable tblUser;
-    private com.tuandhpc05076.Swing.TextField txtGhiChu;
     private com.tuandhpc05076.Swing.TextField txtGhiChu1;
     private com.tuandhpc05076.Swing.TextField txtHocPhi;
+    private com.tuandhpc05076.Swing.TextField txtLopHoc;
     private com.tuandhpc05076.Swing.TextField txtNgayKhaiGiang;
     private com.tuandhpc05076.Swing.TextField txtNgayTao;
     private com.tuandhpc05076.Swing.TextField txtTenChuyenDe;
