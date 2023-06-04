@@ -519,9 +519,10 @@
             <Component class="com.tuandhpc05076.Swing.Combobox" name="cboDieuKienLoc">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="2">
-                    <StringItem index="0" value="T&#x103;ng"/>
-                    <StringItem index="1" value="Gi&#x1ea3;m"/>
+                  <StringArray count="3">
+                    <StringItem index="0" value="M&#x1eb7;c &#x111;&#x1ecb;nh"/>
+                    <StringItem index="1" value="T&#x103;ng"/>
+                    <StringItem index="2" value="Gi&#x1ea3;m"/>
                   </StringArray>
                 </Property>
                 <Property name="selectedIndex" type="int" value="-1"/>

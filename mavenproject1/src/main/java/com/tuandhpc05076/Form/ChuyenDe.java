@@ -230,7 +230,7 @@ public class ChuyenDe extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Mô tả của bạn đã để trống");
             return false;
         }
-   
+
         return true;
     }
 
@@ -401,12 +401,14 @@ public class ChuyenDe extends javax.swing.JPanel {
                     txtAnh.setText("No Avatar");
                     txtAnh.setIcon(null);
                 } else {
-                    txtAnh.setText("");
-                    ImageIcon imgic = new ImageIcon(getClass().getResource("/com/tuandhpc05076/Image/" + cd.getHinh()));
-                    Image img = imgic.getImage();
-                    int Width = txtAnh.getWidth();
-                    int Height = txtAnh.getHeight();
-                    txtAnh.setIcon(new ImageIcon(img.getScaledInstance(Width, Height, 0)));
+                    txtAnh.setIcon(ShareHelper.readLogo(cd.getHinh()));
+                    txtAnh.setToolTipText(cd.getHinh());
+                    ImageIcon imgic = new ImageIcon("Logos/" + cd.getHinh().trim());
+                    int width = txtAnh.getWidth();
+                    int height = txtAnh.getHeight();
+                    Image scaledImage = imgic.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+// Gán ảnh đã được chỉnh tỉ lệ cho txtAnh
+                    txtAnh.setIcon(new ImageIcon(scaledImage));
 
                 }
                 txtMoTa.setText(cd.getMoTa());
@@ -783,7 +785,7 @@ public class ChuyenDe extends javax.swing.JPanel {
             }
         });
 
-        cboDieuKienLoc.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tăng", "Giảm" }));
+        cboDieuKienLoc.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mặc định", "Tăng", "Giảm" }));
         cboDieuKienLoc.setSelectedIndex(-1);
         cboDieuKienLoc.setLabeText("Sắp xếp học phí theo");
         cboDieuKienLoc.addActionListener(new java.awt.event.ActionListener() {
@@ -1063,12 +1065,19 @@ public class ChuyenDe extends javax.swing.JPanel {
                         txtAnh.setIcon(null);
                     } else {
                         txtAnh.setText("");
-                        ImageIcon imgic = new ImageIcon(getClass().getResource("/com/tuandhpc05076/Image/" + cd.getHinh()));
-                        Image img = imgic.getImage();
-                        int Width = txtAnh.getWidth();
-                        int Height = txtAnh.getHeight();
-                        txtAnh.setIcon(new ImageIcon(img.getScaledInstance(Width, Height, 0)));
-
+//                        ImageIcon imgic = new ImageIcon(getClass().getResource("/com/tuandhpc05076/Image/" + cd.getHinh()));
+//                        Image img = imgic.getImage();
+//                        int Width = txtAnh.getWidth();
+//                        int Height = txtAnh.getHeight();
+//                        txtAnh.setIcon(new ImageIcon(img.getScaledInstance(Width, Height, 0)));
+                        txtAnh.setIcon(ShareHelper.readLogo(cd.getHinh()));
+                        txtAnh.setToolTipText(cd.getHinh());
+                        ImageIcon imgic = new ImageIcon("Logos/" + cd.getHinh().trim());
+                        int width = txtAnh.getWidth();
+                        int height = txtAnh.getHeight();
+                        Image scaledImage = imgic.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+// Gán ảnh đã được chỉnh tỉ lệ cho txtAnh
+                        txtAnh.setIcon(new ImageIcon(scaledImage));
                     }
                     txtMoTa.setText(cd.getMoTa());
                 }
@@ -1088,9 +1097,12 @@ public class ChuyenDe extends javax.swing.JPanel {
             Collections.sort(listCD, (sv1, sv2) -> (int) (sv1.getHocPhi() - sv2.getHocPhi()));
 //        Collections.reverse(list);
             Duyet();
-        } else {
+        } else if (name.equalsIgnoreCase("Giảm")) {
             Collections.sort(listCD, (sv1, sv2) -> (int) (sv1.getHocPhi() - sv2.getHocPhi()));
             Collections.reverse(listCD);
+            Duyet();
+        } else {
+            Collections.sort(listCD, (sv1, sv2) -> (sv1.getMaCD().compareTo(sv2.getMaCD())));
             Duyet();
         }
 
